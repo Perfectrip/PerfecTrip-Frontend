@@ -1,0 +1,62 @@
+<template>
+    <b-row class="mt-4 mb-4 text-center" style="background-color: #336600; height: 100px; align-items: center; justify-items: center;">
+      <select-sido @select-sido="selectSido"></select-sido>
+      <select-gugun :sidoCode="sidoCode" @select-gugun="selectGugun"></select-gugun>
+      <b-col class="sm-4">
+      <b-form-select v-model="selected" :options="options"></b-form-select>
+      </b-col>
+      <!--<button style="width: 150px; height: 50px; margin-right: 20px;"></button>-->
+      <b-button variant="outline-light" style="margin-right: 20px;">검색하기</b-button>
+    </b-row>
+  </template>
+  
+  <script>
+  import { mapActions, mapMutations } from "vuex";
+  import SelectSido from "@/components/item/SelectSido.vue";
+  import SelectGugun from "@/components/item/SelectGugun.vue";
+  
+  const itemStore = "itemStore";
+  
+  export default {
+    name: "MainSearchBar",
+    components: {
+      SelectSido,
+      SelectGugun,
+    },
+    data() {
+      return {
+            sidoCode: null,
+            options: [
+          { value: '100', text: '전체' },
+          { value: '12', text: '관광지' },
+          { value: '14', text: '문화시설' },
+          { value: '15', text: '축제공연행사' },
+          { value: '25', text: '여행코스' },
+          { value: '28', text: '레포츠' },
+          { value: '32', text: '숙박' },
+          { value: '38', text: '쇼핑' },
+          { value: '39', text: '음식점' },
+          ],
+      };
+    },
+    computed: {},
+    created() {},
+    methods: {
+//      ...mapActions(mainStore, ["getHousList"]),
+      ...mapActions(itemStore, ["getGugun"]),
+      ...mapMutations(itemStore, ["CLEAR_GUGUN_LIST"]),
+      selectSido(sidoCode) {
+        this.CLEAR_GUGUN_LIST();
+        this.getGugun(sidoCode);
+        this.sidoCode = sidoCode;
+      },
+     selectGugun(gugunCode) {
+         console.log(this.sidoCode);
+       if (gugunCode) console.log(gugunCode);
+     },
+    },
+  };
+  </script>
+  
+  <style></style>
+  
