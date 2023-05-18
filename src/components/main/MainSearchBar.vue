@@ -13,7 +13,8 @@
   import { mapActions, mapMutations } from "vuex";
   import SelectSido from "@/components/item/SelectSido.vue";
   import SelectGugun from "@/components/item/SelectGugun.vue";
-  
+  import axios from "axios";
+
   const itemStore = "itemStore";
   
   export default {
@@ -61,7 +62,15 @@
         console.log(this.sidoCode);
         console.log(this.gugunCode);
         const url = `http://localhost/attraction/searchContentType?sidoCode=${this.sidoCode}&gugunCode=${this.gugunCode}&contentTypeId=${this.selected}`;
-        window.location.href = url;
+      axios.get(url)
+        .then(response => {
+          // 요청에 대한 처리 로직 작성
+          console.log(response.data);
+        })
+        .catch(error => {
+          // 에러 처리 로직 작성
+          console.error(error);
+        });
       },
     },
   };
