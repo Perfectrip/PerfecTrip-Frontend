@@ -47,7 +47,7 @@
       ...mapMutations(itemStore, ["CLEAR_GUGUN_LIST"]),
       selectSido(sidoCode) {
         this.CLEAR_GUGUN_LIST();
-        this.getGugun(sidoCode);
+        // this.getGugun(sidoCode);
         this.sidoCode = sidoCode;
       },
       selectGugun(gugunCode) {
