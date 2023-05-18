@@ -6,7 +6,6 @@
       <b-form-select v-model="selected" :options="options" @change="sendRequest"></b-form-select>
       </b-col>
       <!--<button style="width: 150px; height: 50px; margin-right: 20px;"></button>-->
-      <b-button variant="outline-light" style="margin-right: 20px;" @click="search">검색하기</b-button>
     </b-row>
   </template>
   
