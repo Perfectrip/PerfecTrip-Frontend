@@ -3,10 +3,10 @@
       <select-sido @select-sido="selectSido"></select-sido>
       <select-gugun :sidoCode="sidoCode" @select-gugun="selectGugun"></select-gugun>
       <b-col class="sm-4">
-      <b-form-select v-model="selected" :options="options"></b-form-select>
+      <b-form-select v-model="selected" :options="options" @change="sendRequest"></b-form-select>
       </b-col>
       <!--<button style="width: 150px; height: 50px; margin-right: 20px;"></button>-->
-      <b-button variant="outline-light" style="margin-right: 20px;">검색하기</b-button>
+      <b-button variant="outline-light" style="margin-right: 20px;" @click="search">검색하기</b-button>
     </b-row>
   </template>
   
@@ -50,10 +50,20 @@
         this.getGugun(sidoCode);
         this.sidoCode = sidoCode;
       },
-     selectGugun(gugunCode) {
-         console.log(this.sidoCode);
-       if (gugunCode) console.log(gugunCode);
-     },
+      selectGugun(gugunCode) {
+      console.log(this.sidoCode);
+          if (gugunCode) {
+            console.log(gugunCode);
+            this.gugunCode = gugunCode;
+          }
+      },
+
+      sendRequest() {
+        console.log(this.sidoCode);
+        console.log(this.gugunCode);
+        const url = `http://localhost/attraction/searchContentType?sidoCode=${this.sidoCode}&gugunCode=${this.gugunCode}&contentTypeId=${this.selected}`;
+        window.location.href = url;
+      },
     },
   };
   </script>
