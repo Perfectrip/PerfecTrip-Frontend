@@ -47,7 +47,7 @@ export default {
   name: "AppMain",
   components: {
     MainSearchBar,
-    TheKakaoMap
+    TheKakaoMap,
 },
   props: {
     msg: String,
