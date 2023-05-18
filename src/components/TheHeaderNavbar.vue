@@ -20,8 +20,8 @@
             <router-link :to="{ name: 'main' }" class="link">
               메인
             </router-link>
-            <router-link :to="{ name: 'insta' }" class="m-2 link">
-              인스타그램
+            <router-link :to="{ name: 'search' }" class="m-2 link">
+              나의 여행계획
             </router-link>
             <router-link :to="{ name: 'board' }" class="m-2 link">
               게시판

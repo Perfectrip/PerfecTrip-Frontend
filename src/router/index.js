@@ -1,7 +1,7 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
 import AppMain from "@/views/AppMain";
-import AppInstagram from "@/views/AppInstagram";
+import AppSearch from "@/views/AppSearch";
 import AppHouse from "@/views/AppHouse";
 import AppTodo from "@/views/AppTodo";
 import AppElectricCharger from "@/views/AppElectricCharger";
@@ -38,9 +38,9 @@ const routes = [
     component: AppMain,
   },
   {
-    path: "/instagram",
-    name: "insta",
-    component: AppInstagram,
+    path: "/search",
+    name: "search",
+    component: AppSearch,
   },
   {
     path: "/house",
