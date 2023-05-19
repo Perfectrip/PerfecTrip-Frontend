@@ -6,8 +6,9 @@
     <b-row>
       <b-col></b-col>
       <b-col cols="10">
-        <MainSearchBar></MainSearchBar>
-        <TheKakaoMap></TheKakaoMap>
+        <planSearchBar :data_list="loc_list"
+                        @data_send="checkData"></planSearchBar>
+        <KeywordKakaoMap :chargers="loc_list"></KeywordKakaoMap>
       </b-col>
       <b-col></b-col>
     </b-row>
@@ -23,15 +24,26 @@
 </template>
 
 <script>
-import MainSearchBar from "@/components/main/MainSearchBar.vue";
-import TheKakaoMap from "@/components/TheKakaoMap.vue";
+import planSearchBar from "@/components/plan/planSearchBar.vue";
+import KeywordKakaoMap from "@/components/KeywordKakaoMap.vue";
 import MainHeader from "@/components/main/MainHeader.vue";
 export default {
   name: "AppSearch",
   components: {
-    MainSearchBar,
-    TheKakaoMap,
+    planSearchBar,
+    KeywordKakaoMap,
     MainHeader
+  },
+  data() {
+    return {
+      loc_list:null, 
+    }
+  },
+  methods: {
+    checkData(data_list) {
+      this.loc_list = data_list;
+      console.log(this.loc_list);
+    }
   }
 };
 </script>
