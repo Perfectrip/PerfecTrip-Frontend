@@ -40,7 +40,7 @@ export default {
     // api 스크립트 소스 불러오기 및 지도 출력
     if (window.kakao && window.kakao.maps) {
       this.loadMap();
-    } else {
+    } else { 
       this.loadScript();
     }
   },

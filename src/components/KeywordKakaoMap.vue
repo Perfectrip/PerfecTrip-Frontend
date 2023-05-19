@@ -5,6 +5,7 @@
   </template>
   
   <script>
+
   export default {
     name: "KeywordKakaoMap",
     components: {},
@@ -13,7 +14,8 @@
         map: null,
         positions: [],
         markers: [],
-        loc_data:null,
+        loc_data: null,
+        loc_list: [],
       };
     },
     props: {
@@ -26,6 +28,9 @@
         this.chargers.forEach((charger) => {
           let obj = {};
           obj.title = charger.title;
+          obj.lat = charger.latitude;
+          obj.lng = charger.longitude;
+          obj.id = charger.contentId;
           obj.latlng = new kakao.maps.LatLng(charger.latitude
   , charger.longitude);
           obj.img = charger.firstImage;
@@ -80,9 +85,11 @@
         // 마커 이미지의 이미지 크기 입니다
         //   const imgSize = new kakao.maps.Size(24, 35);
         //   const markerImage = new kakao.maps.MarkerImage(imgSrc, imgSize);
-  
+
         // 마커를 생성합니다
-        this.markers = [];``
+        
+        this.markers = [];
+        this.loc_list = [];
         this.positions.forEach((position) => {
           var imageSrc;
           var markerImage;
@@ -102,16 +109,17 @@
             image: markerImage, // 마커의 이미지
             ctype: position.contentTypeId,
           });
-            this.loc_data = position.title;
-          let content = 
+            var get_loc = position.title;
+            console.log(get_loc);
+            //let test_data = position.title;
+            let content = 
         '<div class="overlayWrap" style="height:300px; width:250px; padding:10px;">' +
         '	 <div>'+				
-        '    <img class="overlayImg" src='+position.img+' style="height:100%; width:100%"/>' +
+        '    <img class="overlayImg" src='+position.img+' style="height:200px; width:100%"/>' +
         '    </div><div class="accommInfoWrap">' +
         '<div>'+
           '    <p3 class="accommName" style="font-size:18px;font-weight: 600;text-align:center;color:#00B98E;">'+position.title+'</p3>' +
-        '      </div><div ><p class="accommRegion" style="font-size:12px;">'+position.add+'</p>' +
-        '    <button class="add" style="border-radius: 20%;background-color:#00B98E; border-color:#00B98E; color:white;" onclick="this.add_location('+"JSON.stringify(get_loc)"+')"> 추가  </button>' +
+        '      </div><div ><p class="accommRegion" style="font-size:12px;">'+position.add+'</p>'+
         '    </div></div>' +
         '    <div class="overlayArrow"></div>' +
         '</div>';
@@ -124,10 +132,16 @@
             
   
             // 마커에 mouseover 이벤트와 mouseout 이벤트를 등록합니다
+            // kakao.maps.event.addListener(marker, 'mouseover', function(){
+            //   addwindow.open(this.map, marker)
+            // })
             // 이벤트 리스너로는 클로저를 만들어 등록합니다 
             // for문에서 클로저를 만들어 주지 않으면 마지막 마커에만 이벤트가 등록됩니다
-            kakao.maps.event.addListener(marker, 'mouseclick', this.makeclickListener(this.map, marker, addwindow));
-            
+            kakao.maps.event.addListener(marker, 'mouseover', this.makeOverListener(this.map, marker, addwindow));
+            kakao.maps.event.addListener(marker, 'click', function () {
+              this.loc_list.push(position);
+              console.log(this.loc_list);
+            }.bind(this));
           this.markers.push(marker);
         });
         console.log("마커수 ::: " + this.markers.length);
@@ -154,14 +168,17 @@
           infowindow.close();
       };
       },
-      makeclickListener(map, marker, addwindow){
+      makeclickListener(marker){
           // 마커에 클릭이벤트를 등록합니다
               kakao.maps.event.addListener(marker, 'click', function() {
                     // 마커 위에 인포윈도우를 표시합니다
-                    addwindow.open(map, marker);  
+                  console.log("클릭이벤트 성공");
               });
       },
-      
+      makeclickEvent(marker) {
+        console.log("클릭이벤트성공!!");  
+        console.log(marker.title);
+      },
       deleteMarker() {
         console.log("마커 싹 지우자!!!", this.markers.length);
         if (this.markers.length > 0) {
@@ -171,9 +188,6 @@
           });
         }
         },
-        add_location(title){
-        console.log(title);
-      },
     },
   };
   </script>
