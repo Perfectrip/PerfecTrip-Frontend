@@ -111,7 +111,7 @@
         '<div>'+
           '    <p3 class="accommName" style="font-size:18px;font-weight: 600;text-align:center;color:#00B98E;">'+position.title+'</p3>' +
         '      </div><div ><p class="accommRegion" style="font-size:12px;">'+position.add+'</p>' +
-        '    <button class="add" style="border-radius: 20%;background-color:#00B98E; border-color:#00B98E; color:white;" onclick="this.add_location('+"JSON.stringify(this.get_loc)"+')"> 추가  </button>' +
+        '    <button class="add" style="border-radius: 20%;background-color:#00B98E; border-color:#00B98E; color:white;" onclick="this.add_location('+"JSON.stringify(get_loc)"+')"> 추가  </button>' +
         '    </div></div>' +
         '    <div class="overlayArrow"></div>' +
         '</div>';
