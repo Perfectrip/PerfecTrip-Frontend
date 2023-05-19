@@ -58,6 +58,11 @@ const routes = [
     component: AppElectricCharger,
   },
   {
+    path: "info-edit",
+    name: "info-edit",
+    component: () => import(/* webpackChunkName: "user" */ "@/components/user/UserInfoEdit"),
+  },
+  {
     path: "/user",
     name: "user",
     component: () => import(/* webpackChunkName: "user" */ "@/views/AppUser"),
