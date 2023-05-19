@@ -17,7 +17,7 @@
 import { electricChargerStationList } from "@/api/electric.js";
 import SelectSido from "@/components/item/SelectSido.vue";
 import SelectGugun from "@/components/item/SelectGugun.vue";
-import TheKakaoMap from "@/components/TheKakaoMap.vue";
+import TheKakaoMap from "@/components/KeywordKakaoMap.vue.js";
 
 export default {
   name: "AppElectricCharger",
