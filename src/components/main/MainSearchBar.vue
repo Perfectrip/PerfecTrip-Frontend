@@ -37,6 +37,7 @@
           { value: '38', text: '쇼핑' },
           { value: '39', text: '음식점' },
           ],
+          datalist:[],
       };
     },
     computed: {},
@@ -57,7 +58,11 @@
             this.gugunCode = gugunCode;
           }
       },
-
+      send_data(data_list) {
+        console.log("emit보냄");
+ //       console.log(data_list);
+        this.$emit('data_send', data_list);
+      },
       sendRequest() {
         console.log(this.sidoCode);
         console.log(this.gugunCode);
@@ -65,7 +70,10 @@
       axios.get(url)
         .then(response => {
           // 요청에 대한 처리 로직 작성
-          console.log(response.data);
+          //console.log(response.data);
+          this.datalist = response.data;
+          //console.log(this.data);
+          this.send_data(this.datalist);
         })
         .catch(error => {
           // 에러 처리 로직 작성

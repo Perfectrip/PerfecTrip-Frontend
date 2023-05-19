@@ -31,11 +31,13 @@
       </b-carousel-slide>
     </b-carousel>
       <b-col>
-        <MainSearchBar></MainSearchBar>
+        <MainSearchBar :data_list="loc_list"
+                        @data_send="checkData"></MainSearchBar>
       </b-col>
-        <TheKakaoMap></TheKakaoMap>
+        <TheKakaoMap :chargers="loc_list"></TheKakaoMap>
       </b-col>
-      <b-col></b-col>
+      <b-col>
+      </b-col>
     </b-row>
   </b-container>
 </template>
@@ -49,9 +51,17 @@ export default {
     MainSearchBar,
     TheKakaoMap,
 },
-  props: {
-    msg: String,
+  data() {
+    return {
+      loc_list:null,
+    }
   },
+  methods: {
+    checkData(data_list) {
+      this.loc_list = data_list;
+      console.log(this.loc_list);
+    }
+  }
 };
 </script>
 
