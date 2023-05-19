@@ -19,6 +19,7 @@ async function tokenRegeneration(user, success, fail) {
 
 async function logout(userid, success, fail) {
   await api.get(`/user/logout/${userid}`).then(success).catch(fail);
+  alert("로그아웃되었습니다");
 }
 
 export { login, findById, tokenRegeneration, logout };
