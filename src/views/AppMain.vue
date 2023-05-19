@@ -17,7 +17,10 @@
       @sliding-end="onSlideEnd"
     >
       <b-carousel-slide>
-        <h1>여행 어쩌고</h1>
+        <b-container>
+        <h1>Enjoy Trip</h1>
+        <h2>떠나보세요</h2>
+        </b-container>
         <template #img>
           <img
             class="d-block img-fluid w-100"
@@ -27,6 +30,36 @@
             alt="image slot"
           >
           
+        </template>
+      </b-carousel-slide>
+      <b-carousel-slide>
+        <b-container>
+        <h1>Enjoy Trip</h1>
+        <h2>떠나보세요</h2>
+        </b-container>
+        <template #img>
+          <img
+            class="d-block img-fluid w-100"
+            width="1024"
+            height="480"
+            src="@/assets/제주.jpg"
+            alt="image slot"
+          >
+        </template>
+      </b-carousel-slide>
+      <b-carousel-slide>
+        <b-container>
+        <h1>Enjoy Trip</h1>
+        <h2>떠나보세요</h2>
+        </b-container>
+        <template #img>
+          <img
+            class="d-block img-fluid w-100"
+            width="1024"
+            height="480"
+            src="@/assets/한옥.jpg"
+            alt="image slot"
+          >
         </template>
       </b-carousel-slide>
     </b-carousel>
@@ -53,10 +86,20 @@ export default {
 },
   data() {
     return {
-      loc_list:null,
+      loc_list: null,
+      slide: 0,
+      sliding: null,
     }
   },
   methods: {
+    //eslint-disable-next-line no-unused-vars
+    onSlideStart(slide) {
+        this.sliding = true
+    },
+      //eslint-disable-next-line no-unused-vars
+      onSlideEnd(slide) {
+        this.sliding = false
+      },
     checkData(data_list) {
       this.loc_list = data_list;
       console.log(this.loc_list);
