@@ -2,10 +2,9 @@
     <div class="container">
         <div class="form">
         <h1>My page</h1>
-            <form>
-                <input type="hidden" name="action" value="update">
+            <form name="update-form" class="update-form" @submit.prevent="updateUser">
                 <label for="id">아이디:</label>
-                <input type="text" id="id" v-model="id">
+                <input type="text" id="id" v-model="id" readonly>
                 <label for="password">비밀번호:</label>
                 <input type="password" id="password" v-model="password">
                 <label for="email">이메일:</label>
@@ -15,7 +14,7 @@
                 <label for="age">나이:</label>
                 <input type="number" id="age" v-model="age">
                 <div id = "buttons">
-                <button @click="submit">수정하기</button>
+                <button type="submit">수정하기</button>
                 </div>
             </form>
         </div>
@@ -23,7 +22,8 @@
   </template>
   
 <script>
-import { mapState } from "vuex";
+import axios from "axios";
+import { mapState, mapActions  } from "vuex";
 const memberStore = "memberStore";
 
   export default {
@@ -47,15 +47,38 @@ const memberStore = "memberStore";
         this.age = this.userInfo.age;
     },
     methods: {
-      submit() {
+		...mapActions(memberStore, ["updateUserInfo"]), // 추가
+
+      updateUser() {
         // 정보 수정 로직
         // 수정된 정보를 서버로 전송 등
-  
-        // 정보 수정 후 리다이렉트
-        this.goToProfile();
+		const userData = {
+        id: this.id,
+        password: this.password,
+        email: this.email,
+        name: this.name,
+        age: this.age,
+		};
+		// Vuex 상태 업데이트
+          this.updateUserInfo(userData); // Vuex 액션 호출
+		
+		axios.put('http://localhost/user/update', userData)
+        .then(response => {
+          // 회원정보 수정 성공 처리
+          console.log(response.data); // 응답 데이터 출력 예시
+          alert(response.data);
+
+          // 정보 수정 후 리다이렉트
+			this.goToMypage();
+        })
+        .catch(error => {
+          // 회원정보 수정 실패 처리
+          console.error(error); // 에러 처리 예시
+          alert(error);
+        });
       },
-      goToProfile() {
-        this.$router.push('/profile');
+      goToMypage() {
+		this.$router.push({ name: "mypage" });
       },
       deleteUser() {
         // 회원 탈퇴 로직

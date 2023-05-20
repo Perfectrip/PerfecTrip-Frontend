@@ -81,6 +81,11 @@ const memberStore = {
         }
       );
     },
+
+    updateUserInfo({ commit }, userInfo) {
+      commit("SET_USER_INFO", userInfo);
+    },
+    
     async tokenRegeneration({ commit, state }) {
       console.log("토큰 재발급 >> 기존 토큰 정보 : {}", sessionStorage.getItem("access-token"));
       await tokenRegeneration(

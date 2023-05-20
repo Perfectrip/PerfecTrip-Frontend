@@ -68,6 +68,7 @@ export default {
       if (this.isLogin) {
         await this.getUserInfo(token);
         console.log("4. confirm() userInfo :: ", this.userInfo);
+        alert("로그인 성공!");
         this.$router.push({ name: "main" });
       }
     },
