@@ -7,8 +7,8 @@
                 <input type="text" id="id" v-model="id" readonly>
                 <label for="password">비밀번호:</label>
                 <input type="password" id="password" v-model="password">
-                <label for="email">이메일:</label>
-                <input type="email" id="email" v-model="email">
+                <label for="email" >이메일:</label>
+                <input type="email" id="email" v-model="email" readonly>
                 <label for="name">이름:</label>
                 <input type="text" id="name" v-model="name">
                 <label for="age">나이:</label>
@@ -80,9 +80,6 @@ const memberStore = "memberStore";
       goToMypage() {
 		this.$router.push({ name: "mypage" });
       },
-      deleteUser() {
-        // 회원 탈퇴 로직
-      }
     }
   };
   </script>

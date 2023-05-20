@@ -68,7 +68,7 @@ export default {
         .catch(error => {
           // 회원 등록 실패 처리
           console.error(error); // 에러 처리 예시
-          alert(error);
+          alert("입력한 아이디 또는 이메일은 이미 사용 중입니다. 다른 아이디 또는 이메일을 입력해 주세요.");
         });
     },
   },

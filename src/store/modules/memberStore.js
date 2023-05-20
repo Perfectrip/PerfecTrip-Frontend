@@ -1,7 +1,7 @@
 import jwtDecode from "jwt-decode";
 import router from "@/router";
 import { login, findById, tokenRegeneration, logout } from "@/api/member";
-
+import axios from 'axios';
 const memberStore = {
   namespaced: true,
   state: {
@@ -85,7 +85,22 @@ const memberStore = {
     updateUserInfo({ commit }, userInfo) {
       commit("SET_USER_INFO", userInfo);
     },
-    
+
+    async deleteUser({ commit, state }) {
+      try {
+        const userId = state.userInfo.id; // 삭제할 유저의 ID
+        await axios.delete(`http://localhost/user/${userId}`);
+        commit("SET_USER_INFO", null); // 유저 정보 초기화
+        commit("SET_IS_LOGIN", false); // 로그인 상태 초기화
+        commit("SET_IS_VALID_TOKEN", false); // 토큰 유효성 초기화
+        alert("회원 탈퇴가 완료되었습니다.");
+        router.push({ name: "main" }); // 메인 페이지로 이동
+      } catch (error) {
+        console.error(error);
+        alert("회원 탈퇴에 실패했습니다.");
+      }
+    },
+
     async tokenRegeneration({ commit, state }) {
       console.log("토큰 재발급 >> 기존 토큰 정보 : {}", sessionStorage.getItem("access-token"));
       await tokenRegeneration(

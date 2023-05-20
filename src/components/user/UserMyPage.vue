@@ -44,7 +44,7 @@
           <hr class="my-4" />
 
           <b-button variant="primary" @click="goToInfoEdit" class="mr-1">정보수정</b-button>
-          <b-button variant="danger" href="#">회원탈퇴</b-button>
+          <b-button variant="danger" @click="delUser">회원탈퇴</b-button>
         </b-jumbotron>
       </b-col>
       <b-col></b-col>
@@ -53,7 +53,7 @@
 </template>
 
 <script>
-import { mapState } from "vuex";
+import { mapState, mapActions } from "vuex";
 
 const memberStore = "memberStore";
 
@@ -62,11 +62,19 @@ export default {
   components: {},
   computed: {
     ...mapState(memberStore, ["userInfo"]),
+    ...mapActions("memberStore", ["deleteUser"]),
   },
 
   methods: {
     goToInfoEdit() {
       this.$router.push({ name: "info-edit" });
+    },
+    async delUser() {
+      // 회원 탈퇴 로직
+      const confirmDelete = confirm("정말로 삭제하시겠습니까?");
+      if (confirmDelete) {
+        await this.deleteUser();
+      }
     }
   }
 };
