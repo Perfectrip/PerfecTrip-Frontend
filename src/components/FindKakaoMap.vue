@@ -27,11 +27,13 @@
     created() {
         console.log("장소", this.locations);
         this.positions = [];
+        this.start.name = this.locations[0].id;
         this.start.x = this.locations[0].lng;
         this.start.y = this.locations[0].lat;
         const len = this.locations.length;
         this.end.x = this.locations[len-1].lng;
         this.end.y = this.locations[len - 1].lat;
+        this.end.name = this.locations[len - 1].id;
         const arr = this.locations.slice(1, len-1);
         arr.forEach((loc) => {
             let obj = {};
