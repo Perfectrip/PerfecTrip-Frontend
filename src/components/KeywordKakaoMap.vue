@@ -5,6 +5,8 @@
   </template>
   
   <script>
+  import { mapActions } from "vuex";
+  const selectedStore = "selectedStore";
 
   export default {
     name: "KeywordKakaoMap",
@@ -15,6 +17,7 @@
         positions: [],
         markers: [],
         loc_data: null,
+        // eslint-disable-next-line no-unused-vars
         loc_list: [],
       };
     },
@@ -51,6 +54,22 @@
       }
     },
     methods: {
+      //store에 저장하기
+      ...mapActions(selectedStore, ["createItem"]),
+        appendItem(item) {
+          const selectedItem = {
+            title: item.title,
+            lat: item.lat,
+            lng: item.lng,
+            id: item.id,
+            latlng: item.latlng,
+            img: item.img,
+            add: item.add,
+            ctype: item.ctype
+            };
+
+          if (selectedItem.title) this.createItem(selectedItem);
+      },
       // api 불러오기
       loadScript() {
         const script = document.createElement("script");
@@ -89,6 +108,7 @@
         // 마커를 생성합니다
         
         this.markers = [];
+        // eslint-disable-next-line no-unused-vars
         this.loc_list = [];
         this.positions.forEach((position) => {
           var imageSrc;
@@ -109,8 +129,9 @@
             image: markerImage, // 마커의 이미지
             ctype: position.contentTypeId,
           });
+            // eslint-disable-next-line no-unused-vars
             var get_loc = position.title;
-            console.log(get_loc);
+            //console.log(get_loc);
             //let test_data = position.title;
             let content = 
         '<div class="overlayWrap" style="height:300px; width:250px; padding:10px;">' +
@@ -138,10 +159,7 @@
             // 이벤트 리스너로는 클로저를 만들어 등록합니다 
             // for문에서 클로저를 만들어 주지 않으면 마지막 마커에만 이벤트가 등록됩니다
             kakao.maps.event.addListener(marker, 'mouseover', this.makeOverListener(this.map, marker, addwindow));
-            kakao.maps.event.addListener(marker, 'click', function () {
-              this.loc_list.push(position);
-              console.log(this.loc_list);
-            }.bind(this));
+            kakao.maps.event.addListener(marker, 'click', this.makeclickListener (this.map, marker, position));
           this.markers.push(marker);
         });
         console.log("마커수 ::: " + this.markers.length);
@@ -168,12 +186,17 @@
           infowindow.close();
       };
       },
-      makeclickListener(marker){
-          // 마커에 클릭이벤트를 등록합니다
-              kakao.maps.event.addListener(marker, 'click', function() {
-                    // 마커 위에 인포윈도우를 표시합니다
-                  console.log("클릭이벤트 성공");
-              });
+      // eslint-disable-next-line no-unused-vars
+        makeclickListener(map, marker, item) {
+            return function () {
+              console.log("클릭이벤트 성공");
+              this.appendItem(item);
+              // 마커에 클릭이벤트를 등록합니다
+              kakao.maps.event.addListener(map, marker, 'click', function () {
+                  //this.appendItem(item);
+                  // 마커 위에 인포윈도우를 표시합니다
+              })
+          }.bind(this)
       },
       makeclickEvent(marker) {
         console.log("클릭이벤트성공!!");  

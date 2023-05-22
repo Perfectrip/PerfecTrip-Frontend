@@ -16,6 +16,10 @@
     <b-row></b-row>
     <b-row>
       <b-col></b-col>
+      <b-col cols="10">
+        <selectedList></selectedList>
+      </b-col>
+      <b-col></b-col>
       <b-col cols="12">
         <b-button squared variant="success" style="width: 180px; margin: 50px; background-color: #336600;">여행경로 생성</b-button>
       </b-col>
@@ -27,12 +31,15 @@
 import planSearchBar from "@/components/plan/planSearchBar.vue";
 import KeywordKakaoMap from "@/components/KeywordKakaoMap.vue";
 import MainHeader from "@/components/main/MainHeader.vue";
+import selectedList from "@/components/selecteditems/selectedList.vue";
+
 export default {
   name: "AppSearch",
   components: {
     planSearchBar,
     KeywordKakaoMap,
-    MainHeader
+    MainHeader,
+    selectedList,
   },
   data() {
     return {
