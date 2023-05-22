@@ -23,18 +23,18 @@
             <router-link :to="{ name: 'search' }" class="m-2 link">
               나의 여행계획
             </router-link>
-            <router-link :to="{ name: 'board' }" class="m-2 link">
-              게시판
-            </router-link>
             <router-link :to="{ name: 'house' }" class="m-2 link">
-              아파트정보
+              핫플자랑하기
             </router-link>
-            <router-link :to="{ name: 'todo' }" class="link">
+            <router-link :to="{ name: 'board' }" class="m-2 link">
+              여행정보공유
+            </router-link>
+            <!-- <router-link :to="{ name: 'todo' }" class="link">
               TodoList
             </router-link>
             <router-link :to="{ name: 'electric' }" class="link">
               전기차충전소
-            </router-link>
+            </router-link> -->
           </b-nav-item>
         </b-navbar-nav>
 
