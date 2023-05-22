@@ -43,15 +43,19 @@
 
 <script>
 import { writeArticle, modifyArticle, getArticle } from "@/api/board";
-
+import { mapState } from "vuex";
+const memberStore = "memberStore";
 export default {
   name: "BoardInputItem",
   data() {
     return {
+      userid: "",
+
       article: {
         articleno: 0,
         userid: "",
         subject: "",
+        order: "",
         content: "",
       },
       isUserid: false,
@@ -60,23 +64,35 @@ export default {
   props: {
     type: { type: String },
   },
+  computed: {
+        ...mapState(memberStore, ["userInfo"]),
+    },
   created() {
+    if (this.type === 'register') {
+      this.userid = this.userInfo.id;
+      this.article.userid = this.userInfo.id;
+      this.isUserid = true;
+      console.log(this.userid);
+    }
     if (this.type === "modify") {
       let param = this.$route.params.articleno;
+      console.log(param);
       getArticle(
         param,
         ({ data }) => {
-          // this.article.articleno = data.article.articleno;
-          // this.article.userid = data.article.userid;
-          // this.article.subject = data.article.subject;
-          // this.article.content = data.article.content;
-          this.article = data;
+          console.log(data);
+          this.article.articleno = data.article.articleNo;
+          this.article.userid = data.article.userId;
+          this.article.subject = data.article.title;
+          this.article.order = data.article.order;
+          this.article.content = data.article.content;
         },
         (error) => {
           console.log(error);
         }
       );
       this.isUserid = true;
+      console.log(this.article);
     }
   },
   methods: {
@@ -101,8 +117,9 @@ export default {
     },
     registArticle() {
       let param = {
-        userid: this.article.userid,
-        subject: this.article.subject,
+        userId: this.article.userid,
+        title: this.article.subject,
+        order: this.article.order,
         content: this.article.content,
       };
       writeArticle(
@@ -122,9 +139,9 @@ export default {
     },
     modifyArticle() {
       let param = {
-        articleno: this.article.articleno,
-        userid: this.article.userid,
-        subject: this.article.subject,
+        articleNo: this.article.articleno,
+        userId: this.article.userid,
+        title: this.article.subject,
         content: this.article.content,
       };
       modifyArticle(

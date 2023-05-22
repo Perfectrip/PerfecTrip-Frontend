@@ -14,6 +14,10 @@ function getArticle(articleno, success, fail) {
   api.get(`/article/${articleno}`).then(success).catch(fail);
 }
 
+function getAttraction(content_id, success, fail) {
+  api.get(`/attraction/${content_id}`).then(success).catch(fail);
+}
+
 function modifyArticle(article, success, fail) {
   api.put(`/article`, JSON.stringify(article)).then(success).catch(fail);
 }
@@ -22,4 +26,4 @@ function deleteArticle(articleno, success, fail) {
   api.delete(`/article/${articleno}`).then(success).catch(fail);
 }
 
-export { listArticle, writeArticle, getArticle, modifyArticle, deleteArticle };
+export { listArticle, writeArticle, getArticle, getAttraction, modifyArticle, deleteArticle };

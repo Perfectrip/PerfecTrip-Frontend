@@ -1,5 +1,5 @@
 <template>
-    <b-container class="bv-example-row">
+  <b-container class="bv-example-row">
     <b-row class="mt-3">
       <b-col cols="11" class="bg-light p-2 pl-5 text-left">
         <img :src=item.img style="opacity: 80%; height: 100px; width: 100px; border-radius: 20%; margin-right: 20px;"/>
