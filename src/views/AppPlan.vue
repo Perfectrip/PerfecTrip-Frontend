@@ -7,7 +7,7 @@
         <b-col></b-col>
         <b-col cols="10">
             <div style="background-color: #336600; height: 100px; margin-bottom: 20px; padding: 30px;">
-                <h3 style="color: aliceblue;"> 최단 경로가 생성되었습니다. </h3>
+                <h3 style="color: aliceblue;"> PerfecTrip이 추천하는 경로 </h3>
             </div>
           <FindKakaoMap :locations="this.items"></FindKakaoMap>
           <div style="background-color: #336600; height: 100px; margin-bottom: 20px;"></div>

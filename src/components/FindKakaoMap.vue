@@ -6,6 +6,7 @@
   
   <script>
   import axios from "axios";
+
   export default {
     name: "FindKakaoMap",
     components: {},
@@ -14,6 +15,8 @@
         map: null,
         positions: [],
         markers: [],
+        start: {},
+        end: {},
       };
     },
     props: {
@@ -24,7 +27,13 @@
     created() {
         console.log("장소", this.locations);
         this.positions = [];
-        this.locations.forEach((loc) => {
+        this.start.x = this.locations[0].lng;
+        this.start.y = this.locations[0].lat;
+        const len = this.locations.length;
+        this.end.x = this.locations[len-1].lng;
+        this.end.y = this.locations[len - 1].lat;
+        const arr = this.locations.slice(1, len-1);
+        arr.forEach((loc) => {
             let obj = {};
             obj.x = loc.lng;
             obj.y = loc.lat;
@@ -57,20 +66,14 @@
       //모빌리티 api 가져오기
         loadApi() {
               var params = {
-                "origin": {
-        "x": "127.11024293202674",
-        "y": " 37.394348634049784"
-    },
-    "destination": {
-        "x": "127.10860518470294",
-        "y": "37.401999820065534"
-    },
-    "waypoints": this.positions,
-    "priority": "RECOMMEND",
-    "car_fuel": "GASOLINE",
-    "car_hipass": false,
-    "alternatives": false,
-    "road_details": false
+                "origin": this.start,
+                "destination": this.end,
+                "waypoints": this.positions,
+                "priority": "RECOMMEND",
+                "car_fuel": "GASOLINE",
+                "car_hipass": false,
+                "alternatives": false,
+                "road_details": false
             }
               axios.post('https://apis-navi.kakaomobility.com/v1/waypoints/directions', params, {
                 headers : {
