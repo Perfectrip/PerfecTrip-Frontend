@@ -7,7 +7,7 @@
   <script>
   import axios from "axios";
   export default {
-    name: "KakaoMap",
+    name: "FindKakaoMap",
     components: {},
     data() {
       return {
@@ -17,31 +17,26 @@
       };
     },
     props: {
-      chargers: [],
+      locations: [],
     },
     watch: {
-      chargers() {
-        console.log("충전소", this.chargers);
+  },
+    created() {
+        console.log("장소", this.locations);
         this.positions = [];
-        this.chargers.forEach((charger) => {
-          let obj = {};
-          obj.title = charger.title;
-          obj.latlng = new kakao.maps.LatLng(charger.latitude
-  , charger.longitude);
-          obj.img = charger.firstImage;
-          obj.add = charger.addr1;
-          obj.ctype = charger.contentTypeId;
-          this.positions.push(obj);
-        });
-        this.loadMaker();
-      },
+        this.locations.forEach((loc) => {
+            let obj = {};
+            obj.x = loc.lng;
+            obj.y = loc.lat;
+            obj.name = loc.id;
+            this.positions.push(obj);
+            }),
+      this.loadApi();
     },
-    created() {},
     mounted() {
       // api 스크립트 소스 불러오기 및 지도 출력
       if (window.kakao && window.kakao.maps) {
             this.loadMap();
-            this.loadApi();
       } else { 
         this.loadScript();
       }
@@ -70,18 +65,7 @@
         "x": "127.10860518470294",
         "y": "37.401999820065534"
     },
-    "waypoints": [
-        {
-            "name": "name0",
-            "x": "128.5383411",
-            "y": "35.82815978"
-        },
-        {
-            "name": "name1",
-            "x": "126.8966762",
-            "y": "35.14447757"
-        }
-    ],
+    "waypoints": this.positions,
     "priority": "RECOMMEND",
     "car_fuel": "GASOLINE",
     "car_hipass": false,
@@ -125,7 +109,7 @@
                          
                     let { title, position} = arrays[0];
                     // 마커 이미지의 이미지 크기 입니다
-                    let imageSize = new window.kakao.maps.Size(24, 35);
+                    let imageSize = new window.kakao.maps.Size(55, 55);
                     // 마커 이미지를 생성합니다    
                     let image = new window.kakao.maps.MarkerImage('https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/red_b.png', imageSize);
                     // 마커를 생성합니다
@@ -188,7 +172,7 @@
         const container = document.getElementById("map");
         const options = {
           center: new window.kakao.maps.LatLng(33.450701, 126.570667),
-          level: 3,
+          level: 13,
         };
   
         this.map = new window.kakao.maps.Map(container, options);

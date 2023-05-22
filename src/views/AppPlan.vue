@@ -9,7 +9,7 @@
             <div style="background-color: #336600; height: 100px; margin-bottom: 20px; padding: 30px;">
                 <h3 style="color: aliceblue;"> 최단 경로가 생성되었습니다. </h3>
             </div>
-          <FindKakaoMap></FindKakaoMap>
+          <FindKakaoMap :locations="this.items"></FindKakaoMap>
           <div style="background-color: #336600; height: 100px; margin-bottom: 20px;"></div>
         </b-col>
         <b-col></b-col>
@@ -36,6 +36,10 @@
   <script>
   import MainHeader from "@/components/main/MainHeader.vue";
   import FindKakaoMap from "@/components/FindKakaoMap.vue";
+  import { mapState } from "vuex";
+
+  const selectedStore = "selectedStore";
+
   export default {
     name: "AppSearch",
     components: {
@@ -45,6 +49,12 @@
     data() {
       return {
       }
+    },
+    created() {
+      //console.log(this.items);
+    },
+    computed: {
+      ...mapState(selectedStore, ["items"]),
     },
     methods: {
       }
