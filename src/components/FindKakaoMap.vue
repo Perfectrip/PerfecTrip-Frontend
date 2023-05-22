@@ -17,6 +17,8 @@
         markers: [],
         start: {},
         end: {},
+        route: [],
+        result: '',
       };
     },
     props: {
@@ -86,7 +88,21 @@
                 .then(arg => {
                 // eslint-disable-next-line no-unused-vars
                 let {result_code, summary, sections} = arg?.data?.routes[0];
-                console.log(arg)
+                //console.log(arg)
+                //경로 저장
+                this.route.push(summary.origin.name);
+                summary.waypoints.forEach((way) => {
+                    this.route.push(way.name);
+                });
+                this.route.push(summary.destination.name);
+                console.log(this.route);
+                //경로 문자열 변환
+                this.route.forEach((loc) => {
+                    this.result = this.result+ '-' + String(loc);
+                });
+                this.result = this.result.substring(1);
+                console.log('emit으로 보냄', this.result);
+                this.$emit('way_list', this.result);
                 if(sections[0]){
                     let {distance, duration, guides : arrays, roads} = sections[0];  //distance : 미터단위, duration : 초 단위
                     
@@ -183,78 +199,6 @@
         this.map = new window.kakao.maps.Map(container, options);
         //   this.loadMaker();
       },
-      // 지정한 위치에 마커 불러오기
-      loadMaker() {
-        // 현재 표시되어있는 marker들이 있다면 marker에 등록된 map을 없애준다.
-        console.log("1111");
-        this.deleteMarker();
-        console.log("2222");
-        // 마커 이미지를 생성합니다
-        //   const imgSrc = require("@/assets/map/markerStar.png");
-        // 마커 이미지의 이미지 크기 입니다
-        //   const imgSize = new kakao.maps.Size(24, 35);
-        //   const markerImage = new kakao.maps.MarkerImage(imgSrc, imgSize);
-  
-        // 마커를 생성합니다
-        this.markers = [];``
-        this.positions.forEach((position) => {
-          var imageSrc;
-          var markerImage;
-          var imageSize = new kakao.maps.Size(24, 35);
-          if(position.ctype == 39) imageSrc = "./음식점.png";
-          else if(position.ctype == 12) imageSrc = "./관광지.png";
-          else if(position.ctype == 32) imageSrc = "./숙박.png";
-          else if(position.ctype == 38) imageSrc = "./쇼핑.png";
-          else imageSrc = "https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png";
-            // 마커 이미지를 생성합니다
-            //imageSrc = "https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png";
-          markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize);
-          const marker = new kakao.maps.Marker({
-            map: this.map, // 마커를 표시할 지도
-            position: position.latlng, // 마커를 표시할 위치
-            title: position.title, // 마커의 타이틀, 마커에 마우스를 올리면 타이틀이 표시됩니다
-            image: markerImage, // 마커의 이미지
-            ctype: position.contentTypeId,
-          });
-          
-          let content = 
-          '<div class="overlayWrap" style="height:300px; width:250px; padding:10px;">' +
-          '	 <div>'+				
-          '    <img class="overlayImg" src='+position.img+' style="height:200px; width:100%"/>' +
-          '    </div><div class="accommInfoWrap">' +
-          '<div>'+
-            '    <p3 class="accommName" style="font-size:18px;font-weight: 600;text-align:center;color:#00B98E;">'+position.title+'</p3>' +
-          '      </div><div ><p class="accommRegion" style="font-size:12px;">'+position.add+'</p>'+
-          '    </div></div>' +
-          '    <div class="overlayArrow"></div>' +
-          '</div>';
-  
-            // 마커에 표시할 인포윈도우를 생성합니다 
-            var addwindow = new kakao.maps.InfoWindow({
-              content: content, // 인포윈도우에 표시할 내용
-              removable : true
-            });
-            
-  
-            // 마커에 mouseover 이벤트와 mouseout 이벤트를 등록합니다
-            // 이벤트 리스너로는 클로저를 만들어 등록합니다 
-            // for문에서 클로저를 만들어 주지 않으면 마지막 마커에만 이벤트가 등록됩니다
-            kakao.maps.event.addListener(marker, 'mouseclick', this.makeclickListener(this.map, marker, addwindow));
-            
-          this.markers.push(marker);
-        });
-        console.log("마커수 ::: " + this.markers.length);
-  
-        // 4. 지도를 이동시켜주기
-        // 배열.reduce( (누적값, 현재값, 인덱스, 요소)=>{ return 결과값}, 초기값);
-        const bounds = this.positions.reduce(
-          (bounds, position) => bounds.extend(position.latlng),
-          new kakao.maps.LatLngBounds()
-        );
-        this.map.setBounds(bounds);
-  
-  
-      },
       // 인포윈도우를 표시하는 클로저를 만드는 함수입니다 
       makeOverListener(map, marker, infowindow) {
           return function() {
@@ -273,16 +217,6 @@
                     // 마커 위에 인포윈도우를 표시합니다
                     addwindow.open(map, marker);  
               });
-      },
-      
-      deleteMarker() {
-        console.log("마커 싹 지우자!!!", this.markers.length);
-        if (this.markers.length > 0) {
-          this.markers.forEach((item) => {
-            console.log(item);
-            item.setMap(null);
-          });
-        }
       },
     },
   };
