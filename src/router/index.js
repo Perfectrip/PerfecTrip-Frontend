@@ -4,6 +4,7 @@ import AppMain from "@/views/AppMain";
 import AppSearch from "@/views/AppSearch";
 import AppHouse from "@/views/AppHouse";
 import AppTodo from "@/views/AppTodo";
+import AppPlan from "@/views/AppPlan";
 import AppElectricCharger from "@/views/AppElectricCharger";
 
 import store from "@/store";
@@ -56,6 +57,11 @@ const routes = [
     path: "/electric",
     name: "electric",
     component: AppElectricCharger,
+  },
+  {
+    path: "/plan",
+    name: "plan",
+    component: AppPlan,
   },
   {
     path: "info-edit",

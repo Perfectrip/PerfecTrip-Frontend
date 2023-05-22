@@ -23,6 +23,9 @@
             <router-link :to="{ name: 'search' }" class="m-2 link">
               나의 여행계획
             </router-link>
+            <router-link :to="{ name: 'plan' }" class="m-2 link">
+              여행 계획
+            </router-link>
             <router-link :to="{ name: 'house' }" class="m-2 link">
               핫플자랑하기
             </router-link>
