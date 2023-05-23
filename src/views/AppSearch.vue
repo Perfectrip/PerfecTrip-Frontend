@@ -21,7 +21,7 @@
       </b-col>
       <b-col></b-col>
       <b-col cols="12">
-        <b-button squared variant="success" style="width: 180px; margin: 50px; background-color: #336600;">여행경로 생성</b-button>
+        <b-button squared href="/plan" variant="success" style="width: 180px; margin: 50px; background-color: #336600;">여행경로 생성</b-button>
       </b-col>
     </b-row>
   </b-container>

@@ -8,7 +8,7 @@
             text-variant="dark"
             border-variant="white"
           >
-            <template #header>Enjoy Trip</template>
+            <template #header>PerfecTrip</template>
   
             <template #lead> 나만의 여행계획을 짜보세요 </template>
   

@@ -18,7 +18,7 @@
     >
       <b-carousel-slide>
         <b-container>
-        <h1>Enjoy Trip</h1>
+        <h1>PerfecTrip</h1>
         <h2>떠나보세요</h2>
         </b-container>
         <template #img>
@@ -34,7 +34,7 @@
       </b-carousel-slide>
       <b-carousel-slide>
         <b-container>
-        <h1>Enjoy Trip</h1>
+        <h1>PerfecTrip</h1>
         <h2>떠나보세요</h2>
         </b-container>
         <template #img>
@@ -49,7 +49,7 @@
       </b-carousel-slide>
       <b-carousel-slide>
         <b-container>
-        <h1>Enjoy Trip</h1>
+        <h1>PerfecTrip</h1>
         <h2>떠나보세요</h2>
         </b-container>
         <template #img>
