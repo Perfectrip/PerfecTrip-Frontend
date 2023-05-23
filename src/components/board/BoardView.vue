@@ -100,10 +100,6 @@ export default {
         return this.article.content.split("\n").join("<br>");
       return "";
     },
-    message2() {
-      if (this.article.order) return this.article.order.split("-").join("<br>");
-      return "";
-    },
   },
   watch: {
     async locationlist(){
