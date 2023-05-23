@@ -27,8 +27,7 @@
       locations: [],
     },
     watch: {
-        locations() {
-        console.log("장소", this.locations);
+      locations() {
         this.positions = [];
         console.log(this.locations);
         this.start.name = this.locations[0].contentId;
@@ -47,7 +46,7 @@
             this.positions.push(obj);
             }),
       this.loadApi();
-      }
+    }
   },
     created() {
     },

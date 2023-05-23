@@ -72,6 +72,7 @@
 
 <script>
 // import moment from "moment";
+// eslint-disable-next-line no-unused-vars
 import { getArticle, getAttraction } from "@/api/board";
 // import { getAttraction } from "@/api/attaction"
 import { mapState } from "vuex";
@@ -86,7 +87,10 @@ export default {
   data() {
     return {
       article: {},
+      tmp_attraction:[],
       attractions: [],
+      locationlist: [],
+      leng: 0,
     };
   },
   computed: {
@@ -101,6 +105,33 @@ export default {
       return "";
     },
   },
+  watch: {
+    async locationlist(){
+      console.log("locationlist 확인", this.locationlist);
+      this.leng = this.locationlist.length;
+      console.log(this.leng);
+      for await (const loc of this.locationlist){
+        console.log(loc);
+        await getAttraction(
+          loc,
+          ({ data }) => {
+            this.tmp_attraction.push(data);
+          },
+          (error) => {
+            console.log(error);
+          }
+        )
+      }
+    },
+
+    tmp_attraction() {
+      if (this.tmp_attraction.length === this.leng) {
+        this.attractions = this.tmp_attraction;
+        console.log(this.attractions);
+      }
+    }
+    
+  },
   created() {
     let param = this.$route.params.articleno;
     getArticle(
@@ -110,18 +141,19 @@ export default {
         console.log(this.article);
         // console.log(this.article.order)
         const orderList = this.article.order.split("-");
+        this.locationlist = orderList;
         //console.log(orderList);
-        orderList.forEach((order) => {
-          getAttraction(
-            order,
-            ({ data }) => {
-              this.attractions.push(data);
-            },
-            (error) => {
-              console.log(error);
-            }
-          );
-        });
+        // orderList.forEach((order) => {
+        //   getAttraction(
+        //     order,
+        //     ({ data }) => {
+        //       this.attractions.push(data);
+        //     },
+        //     (error) => {
+        //       console.log(error);
+        //     }
+        //   );
+        // });
       },
       (error) => {
         console.log(error);
