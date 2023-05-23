@@ -20,10 +20,23 @@
           :locations="this.items"
           :result="tmpStr"
           @way_list="getOrder"
+          :send_route = "tmproute"
+          @route_list = "getRoute"
         ></FindKakaoMap>
-        <div
-          style="background-color: #336600; height: 100px; margin-bottom: 20px"
-        ></div>
+        <b-container class="bv-example-row mt-3 text-center" style="height: 200px;">
+          <b-row style="margin:15px;">
+            <b-col style="font-size: large; font-weight: 700;" cols="2">경로</b-col>
+            <b-col cols="10">{{tmproute.route}}</b-col>
+          </b-row>
+          <b-row style="margin:15px;">
+            <b-col style="font-size: large; font-weight: 700;" cols="2">이동 거리</b-col>
+            <b-col cols="10">{{tmproute.meter}} km</b-col>
+          </b-row>
+          <b-row style="margin:15px;">
+            <b-col style="font-size: large; font-weight: 700;" cols="2">소요 시간</b-col>
+            <b-col cols="10">{{tmproute.time}}</b-col>
+          </b-row>
+        </b-container>
       </b-col>
       <b-col></b-col>
     </b-row>
@@ -33,7 +46,7 @@
       <b-col></b-col>
       <b-col cols="10">
         <b-form @submit="onSubmit">
-          <b-form-group id="subject-group" label="제목:" label-for="subject">
+          <b-form-group id="subject-group" label="" label-for="subject">
             <b-form-input
               id="subject"
               v-model="article.subject"
@@ -43,7 +56,7 @@
             ></b-form-input>
           </b-form-group>
 
-          <b-form-group id="content-group" label="내용:" label-for="content">
+          <b-form-group id="content-group" label="" label-for="content">
             <b-form-textarea
               id="content"
               v-model="article.content"
@@ -83,6 +96,7 @@ export default {
   data() {
     return {
       tmpStr: "",
+      tmproute: {},
       article: {
         articleno: 0,
         userid: "",
@@ -105,6 +119,12 @@ export default {
       this.tmpStr = str;
       this.article.order = str;
       console.log("에밋으로받음", this.article.order);
+    },
+    getRoute(route) {
+      this.tmproute.time = route.time;
+      this.tmproute.meter = route.meter;
+      this.tmproute.route = route.route;
+      console.log("에밋으로받음", this.tmproute.route);
     },
     onSubmit(event) {
       event.preventDefault();

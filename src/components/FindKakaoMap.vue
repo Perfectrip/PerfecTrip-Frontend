@@ -19,6 +19,8 @@
         end: {},
         route: [],
         result: '',
+        send_route: {},
+        result_route: '',
       };
     },
     props: {
@@ -98,14 +100,42 @@
                 console.log(this.route);
                 //경로 문자열 변환
                 this.route.forEach((loc) => {
+                    this.result_route = this.result_route + '->' + String(this.locations.find(location => location.id == loc).title);      
                     this.result = this.result+ '-' + String(loc);
                 });
+                //이건 경로 title
+                this.result_route = this.result_route.substring(2);
+                console.log(this.result_route);
                 this.result = this.result.substring(1);
                 //console.log('emit으로 보냄', this.result);
+                //경로 id 만 보냄
                 this.$emit('way_list', this.result);
                 sections.forEach((section) => {
                   this.makeLine(section);
                 })
+                // eslint-disable-next-line no-unused-vars
+                var km = summary.distance / 1000;
+                // eslint-disable-next-line no-unused-vars
+                var time = summary.duration / 60;
+                // eslint-disable-next-line no-unused-vars
+                var time_str = '';
+
+                if (summary.duration < 60) {
+                      time_str = summary.duration.toFixed(0) + '초';
+                    }
+                else if (time < 60) {
+                      time_str = time.toFixed(0) + '분';
+                    }
+                else if (time > 60) {
+                      var hour = Math.floor(time / 60);
+                      var min = time % 60;
+                      time_str = hour + '시간  ' + min.toFixed(0) + '분';
+                    }
+                this.send_route.time = time_str;
+                this.send_route.meter = km.toFixed(1);
+                this.send_route.route = this.result_route;
+                // 화면에... 경로 보여주기 위해... 에밋 보냄...
+                this.$emit('route_list', this.send_route);
             }).catch(err => {
                 console.log(err)
             });
@@ -163,8 +193,7 @@
                             arg.position = new window.kakao.maps.LatLng(arg.y, arg.x);
                         }
                         return arg;
-                    });          
-                         
+                    });
                     let { title, position} = arrays[0];
                     // 마커 이미지의 이미지 크기 입니다
                     let imageSize = new window.kakao.maps.Size(55, 55);
@@ -201,7 +230,6 @@
                         strokeOpacity: 0.7, // 선의 불투명도 입니다 1에서 0 사이의 값이며 0에 가까울수록 투명합니다
                         strokeStyle: 'solid' // 선의 스타일입니다
                     });
-          console.log(position2);
                     // 지도에 선을 표시합니다 
                     polyline.setMap(this.map);    
                                       
