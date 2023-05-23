@@ -22,7 +22,7 @@
         send_route: {},
         result_route: '',
       };
-    },
+    }, 
     props: {
       locations: [],
     },
