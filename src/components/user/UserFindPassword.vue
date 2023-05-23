@@ -56,13 +56,11 @@ export default {
         .put("http://localhost/user/findpassword", params)
         .then((response) => {
           // 1. 있는 이메일이라면, 임시비번 세팅해주고, 해당되는 이메일로 그 패스워드를 전송해줌
-          if (response.data === "") {
+          if (response.data === "fail") {
             throw new Error();
           }
           alert(
-            "임시 비밀번호는 " +
-              response.data +
-              "입니다. 로그인 후에 비밀번호를 변경을 해주세요"
+            "해당 이메일로 임시비밀번호를 발송하였습니다. 이메일을 확인해주세요."
           );
 
           // 2. 로그인 페이지 이동
