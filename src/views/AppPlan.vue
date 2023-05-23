@@ -32,13 +32,8 @@
     <b-row>
       <b-col></b-col>
       <b-col cols="10">
-        <b-form @submit="onSubmit" @reset="onReset">
-          <b-form-group
-            id="subject-group"
-            label="제목:"
-            label-for="subject"
-            description="제목을 입력하세요."
-          >
+        <b-form @submit="onSubmit">
+          <b-form-group id="subject-group" label="제목:" label-for="subject">
             <b-form-input
               id="subject"
               v-model="article.subject"
@@ -53,29 +48,17 @@
               id="content"
               v-model="article.content"
               placeholder="내용 입력..."
+              required
               rows="10"
               max-rows="15"
             ></b-form-textarea>
           </b-form-group>
-          <!-- <b-form-input
-          v-model="article.subject"
-          placeholder="제목"
-        ></b-form-input>
-        <b-form-textarea
-          id="textarea"
-          v-model="article.content"
-          placeholder="내용"
-          rows="12"
-          max-rows="12"
-        ></b-form-textarea> -->
           <b-button
             type="submit"
             variant="success"
             style="width: 180px; margin: 50px; background-color: #336600"
-            @click="onSubmit"
             >여행경로 등록</b-button
           >
-          <b-button type="reset" variant="danger" class="m-1">초기화</b-button>
         </b-form>
       </b-col>
       <b-col></b-col>
@@ -125,23 +108,7 @@ export default {
     },
     onSubmit(event) {
       event.preventDefault();
-      console.log("등록할 작업 여기다하기");
-      console.log(this.article);
-      let err = true;
-      let msg = "";
-      err &&
-        !this.article.subject &&
-        ((msg = "제목 입력해주세요"),
-        (err = false),
-        this.$refs.subject.focus());
-      err &&
-        !this.article.content &&
-        ((msg = "내용 입력해주세요"),
-        (err = false),
-        this.$refs.content.focus());
-
-      if (!err) alert(msg);
-      else this.registArticle();
+      this.registArticle();
     },
     registArticle() {
       let param = {
