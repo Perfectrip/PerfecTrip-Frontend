@@ -32,31 +32,32 @@
     <b-row>
       <b-col></b-col>
       <b-col cols="10">
-        <b-form-group
-          id="subject-group"
-          label="제목:"
-          label-for="subject"
-          description="제목을 입력하세요."
-        >
-          <b-form-input
-            id="subject"
-            v-model="article.subject"
-            type="text"
-            required
-            placeholder="제목 입력..."
-          ></b-form-input>
-        </b-form-group>
+        <b-form @submit="onSubmit" @reset="onReset">
+          <b-form-group
+            id="subject-group"
+            label="제목:"
+            label-for="subject"
+            description="제목을 입력하세요."
+          >
+            <b-form-input
+              id="subject"
+              v-model="article.subject"
+              type="text"
+              required
+              placeholder="제목 입력..."
+            ></b-form-input>
+          </b-form-group>
 
-        <b-form-group id="content-group" label="내용:" label-for="content">
-          <b-form-textarea
-            id="content"
-            v-model="article.content"
-            placeholder="내용 입력..."
-            rows="10"
-            max-rows="15"
-          ></b-form-textarea>
-        </b-form-group>
-        <!-- <b-form-input
+          <b-form-group id="content-group" label="내용:" label-for="content">
+            <b-form-textarea
+              id="content"
+              v-model="article.content"
+              placeholder="내용 입력..."
+              rows="10"
+              max-rows="15"
+            ></b-form-textarea>
+          </b-form-group>
+          <!-- <b-form-input
           v-model="article.subject"
           placeholder="제목"
         ></b-form-input>
@@ -67,13 +68,15 @@
           rows="12"
           max-rows="12"
         ></b-form-textarea> -->
-        <b-button
-          type="submit"
-          variant="success"
-          style="width: 180px; margin: 50px; background-color: #336600"
-          @click="onSubmit"
-          >여행경로 등록</b-button
-        >
+          <b-button
+            type="submit"
+            variant="success"
+            style="width: 180px; margin: 50px; background-color: #336600"
+            @click="onSubmit"
+            >여행경로 등록</b-button
+          >
+          <b-button type="reset" variant="danger" class="m-1">초기화</b-button>
+        </b-form>
       </b-col>
       <b-col></b-col>
     </b-row>
@@ -120,7 +123,8 @@ export default {
       this.article.order = str;
       console.log("에밋으로받음", this.article.order);
     },
-    onSubmit() {
+    onSubmit(event) {
+      event.preventDefault();
       console.log("등록할 작업 여기다하기");
       console.log(this.article);
       let err = true;

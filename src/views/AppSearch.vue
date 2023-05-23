@@ -6,8 +6,10 @@
     <b-row>
       <b-col></b-col>
       <b-col cols="10">
-        <planSearchBar :data_list="loc_list"
-                        @data_send="checkData"></planSearchBar>
+        <planSearchBar
+          :data_list="loc_list"
+          @data_send="checkData"
+        ></planSearchBar>
         <KeywordKakaoMap :chargers="loc_list"></KeywordKakaoMap>
       </b-col>
       <b-col></b-col>
@@ -21,7 +23,14 @@
       </b-col>
       <b-col></b-col>
       <b-col cols="12">
-        <b-button squared variant="success" style="width: 180px; margin: 50px; background-color: #336600;">여행경로 생성</b-button>
+        <router-link :to="{ name: 'plan' }">
+          <b-button
+            squared
+            variant="success"
+            style="width: 180px; margin: 50px; background-color: #336600"
+            >여행경로 생성</b-button
+          >
+        </router-link>
       </b-col>
     </b-row>
   </b-container>
@@ -43,15 +52,15 @@ export default {
   },
   data() {
     return {
-      loc_list:null, 
-    }
+      loc_list: null,
+    };
   },
   methods: {
     checkData(data_list) {
       this.loc_list = data_list;
       console.log(this.loc_list);
-    }
-  }
+    },
+  },
 };
 </script>
 

@@ -61,6 +61,7 @@ const routes = [
   {
     path: "/plan",
     name: "plan",
+    beforeEnter: onlyAuthUser,
     component: AppPlan,
   },
   {
