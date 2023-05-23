@@ -34,6 +34,7 @@
           <b-card-body class="text-left">
             <div v-html="message"></div>
             <h3>여행 경로</h3>
+            <ViewKakaoMap :locations="attractions"></ViewKakaoMap>
             <ul>
               <li v-for="attraction in attractions" :key="attraction.id">
                 <b-container class="bv-example-row">
@@ -74,11 +75,14 @@
 import { getArticle, getAttraction } from "@/api/board";
 // import { getAttraction } from "@/api/attaction"
 import { mapState } from "vuex";
-
+import ViewKakaoMap from "../ViewKakaoMap.vue";
 const memberStore = "memberStore";
 
 export default {
   name: "BoardDetail",
+  components: {
+    ViewKakaoMap,
+  },
   data() {
     return {
       article: {},
