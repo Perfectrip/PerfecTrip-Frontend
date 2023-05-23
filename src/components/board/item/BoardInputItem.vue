@@ -94,11 +94,9 @@ export default {
     }
     if (this.type === "modify") {
       let param = this.$route.params.articleno;
-      console.log(param);
       getArticle(
         param,
         ({ data }) => {
-          console.log(data);
           this.article.articleno = data.article.articleNo;
           this.article.userid = data.article.userId;
           this.article.subject = data.article.title;
