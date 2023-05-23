@@ -28,7 +28,7 @@
     },
     watch: {
         locations() {
-          console.log("장소", this.locations);
+        console.log("장소", this.locations);
         this.positions = [];
         console.log(this.locations);
         this.start.name = this.locations[0].contentId;
@@ -197,11 +197,12 @@
                         }
                         return arg;
                     });
+                    
                     let { title, position} = arrays[0];
                     // 마커 이미지의 이미지 크기 입니다
-                    let imageSize = new window.kakao.maps.Size(55, 55);
+                    let imageSize = new window.kakao.maps.Size(22, 33);
                     // 마커 이미지를 생성합니다    
-                    let image = new window.kakao.maps.MarkerImage('@/flag.png', imageSize);
+                    let image = new window.kakao.maps.MarkerImage("https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png", imageSize);
                     // 마커를 생성합니다
                     // eslint-disable-next-line no-unused-vars
                     let marker1 = new window.kakao.maps.Marker({
@@ -214,7 +215,7 @@
                     let {title : title2, position : position2} = arrays[arrays.length-1];
                     // 마커 이미지의 이미지 크기 입니다
                     // 마커 이미지를 생성합니다    
-                    let image2 = new window.kakao.maps.MarkerImage('@/flag.png', imageSize);
+                    let image2 = new window.kakao.maps.MarkerImage("https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png", imageSize);
                     // 마커를 생성합니다
                     // eslint-disable-next-line no-unused-vars
                     let marker2 = new window.kakao.maps.Marker({

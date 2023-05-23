@@ -126,6 +126,8 @@ export default {
       (error) => {
         console.log(error);
       }
+
+      
     );
     //console.log(this.article.order);
     //console.log(this.attractions);
