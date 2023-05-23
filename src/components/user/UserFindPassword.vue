@@ -49,13 +49,13 @@ export default {
       // 1. 임시비번 세팅해주고, 해당되는 이메일로 그 패스워드를 전송해줌.(비번 까먹지 말고 로그인하면 바로 바꾸세연^^)
       // 2. 로그인페이지 이동
       // 3. 사용자는 임시비번으로 로그인 -> 로그인 성공
-
       axios
         .put("http://localhost/user/findpassword", this.email)
         .then((response) => {
-          // 회원 등록 성공 처리
           console.log(response.data); // 응답 데이터 출력 예시
-          alert(response.data);
+          // 1. 있는 이메일이라면, 임시비번 세팅해주고, 해당되는 이메일로 그 패스워드를 전송해줌
+
+          // 2. 로그인 페이지 이동
           this.$router.push({ name: "login" });
         })
         .catch((error) => {
