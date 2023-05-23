@@ -70,6 +70,7 @@
             type="submit"
             variant="success"
             style="width: 180px; margin: 50px; background-color: #336600"
+            @click="removeAll"
             >여행경로 등록</b-button
           >
         </b-form>
@@ -83,7 +84,7 @@
 import { writeArticle } from "@/api/board";
 import MainHeader from "@/components/main/MainHeader.vue";
 import FindKakaoMap from "@/components/FindKakaoMap.vue";
-import { mapState } from "vuex";
+import { mapState, mapActions } from "vuex";
 
 const selectedStore = "selectedStore";
 const memberStore = "memberStore";
@@ -115,6 +116,11 @@ export default {
     ...mapState(memberStore, ["userInfo"]),
   },
   methods: {
+    ...mapActions(selectedStore, ["deleteAll"]),
+    //방금 하던 부분
+    removeAll() {
+      this.deleteAll(this.items);
+    },
     getOrder(str) {
       this.tmpStr = str;
       this.article.order = str;

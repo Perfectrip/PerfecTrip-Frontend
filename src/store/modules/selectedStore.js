@@ -12,6 +12,10 @@ const selectedStore = {
         DELETE_ITEM(state, selectedItem) {
             const index = state.items.indexOf(selectedItem);
             state.items.splice(index, 1);
+        },
+        DELETE_ALL(state) {
+            state.items.splice(0, state.items.length);
+            console.log(state.items);
         }
     },
     actions: {
@@ -21,6 +25,9 @@ const selectedStore = {
         deleteItem({ commit }, selectedItem) {
             commit("DELETE_ITEM", selectedItem);
         },
+        deleteAll({ commit }, selectedItem) {
+            commit("DELETE_ALL", selectedItem);
+        }
     },
 }
 
