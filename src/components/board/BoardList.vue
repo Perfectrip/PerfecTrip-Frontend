@@ -103,7 +103,7 @@ export default {
     getSizeOfArticles() {
       // 전체 게시글 개수 정보 가지고 오기
       let param = {
-        pg: this.pg,
+        pg: 1,
         spp: 1000,
         key: this.searchCondition,
         word: this.searchKeyword,
@@ -112,7 +112,6 @@ export default {
         param,
         ({ data }) => {
           this.totalRows = data.length;
-          console.log("전체 리스트의 개수 : ", this.totalRows);
         },
         (error) => {
           console.log(error);
