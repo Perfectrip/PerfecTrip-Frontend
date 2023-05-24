@@ -3,9 +3,8 @@
     <main-header/>
     <b-row cols="12" md="3">
         <b-card
-          v-for="place in places[0]" :key="place.contentId"
+          v-for="place in places" :key="place.contentId"
           v-bind:name="place.title" v-bind:no="place.contentId"
-          v-bind:followState="place.followState"
           tag="article"
           style="max-width: 20rem;"
           class="mb-2"
@@ -28,6 +27,7 @@ import MainHeader from "@/components/main/MainHeader.vue";
 //eslint-disable-next-line no-unused-vars
 import InfiniteLoading from 'vue-infinite-loading';
 import axios from 'axios';
+
 export default {
   name: "AppHouse",
   components: {
@@ -38,33 +38,34 @@ export default {
     axios.get('http://localhost/hotplace?pg=1')
       .then(res => {
         //console.log(res.data);
-        this.places.push(res.data);
+        this.places = res.data;
         console.log(this.places);
       })
   },
   data() {
     return {
       places: [],
-      limit: 1,
+      limit: 2,
     }
   },
   methods: {
     infiniteHandler($state) {
-      axios.get('http://localhost/hotplace?pg=' + (this.limit+1))
+      axios.get('http://localhost/hotplace?pg=' + (this.limit))
         .then(res => {
           console.log('추가로딩',res);
           setTimeout(() => {
             if (res.data.length) {
               this.places = this.places.concat(res.data);
-              console.log('place에 추가됨');
-              $state.loaded();
+              $state.loaded()
+              this.limit += 1;
+              console.log('after',this.places.length, this.limit);
               if (res.data.length / 20 < 1) {
                 $state.complete()
               }
             } else {
               $state.complete()
             }
-          }, 1000)
+          },3000)
         }).catch(err => {
           console.error(err);
         })
