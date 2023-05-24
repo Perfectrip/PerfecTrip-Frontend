@@ -34,19 +34,28 @@
           <b-card-body class="text-left">
             <div v-html="message"></div>
             <h3>여행 경로</h3>
-            <ViewKakaoMap :locations="attractions"
-                          :send_route = "tmproute"
-                          @route_list = "getRoute"></ViewKakaoMap>
-          <b-container class="bv-example-row mt-3 text-center" style="height: 200px;">
-          <b-row style="margin:15px;">
-            <b-col style="font-size: large; font-weight: 700;" cols="2">이동 거리</b-col>
-            <b-col cols="10"> km</b-col>
-          </b-row>
-          <b-row style="margin:15px;">
-            <b-col style="font-size: large; font-weight: 700;" cols="2">소요 시간</b-col>
-            <b-col cols="10"></b-col>
-          </b-row>
-        </b-container>
+            <ViewKakaoMap
+              :locations="attractions"
+              :send_route="tmproute"
+              @route_list="getRoute"
+            ></ViewKakaoMap>
+            <b-container
+              class="bv-example-row mt-3 text-center"
+              style="height: 200px"
+            >
+              <b-row style="margin: 15px">
+                <b-col style="font-size: large; font-weight: 700" cols="2"
+                  >이동 거리</b-col
+                >
+                <b-col cols="10">{{ m }} km</b-col>
+              </b-row>
+              <b-row style="margin: 15px">
+                <b-col style="font-size: large; font-weight: 700" cols="2"
+                  >소요 시간</b-col
+                >
+                <b-col cols="10">{{ t }}</b-col>
+              </b-row>
+            </b-container>
             <ul>
               <li v-for="attraction in attractions" :key="attraction.id">
                 <b-container class="bv-example-row">
@@ -100,10 +109,12 @@ export default {
     return {
       tmproute: {},
       article: {},
-      tmp_attraction:[],
+      tmp_attraction: [],
       attractions: [],
       locationlist: [],
       leng: 0,
+      t: "",
+      m: "",
     };
   },
   computed: {
@@ -115,11 +126,11 @@ export default {
     },
   },
   watch: {
-    async locationlist(){
+    async locationlist() {
       console.log("locationlist 확인", this.locationlist);
       this.leng = this.locationlist.length;
       console.log(this.leng);
-      for await (const loc of this.locationlist){
+      for await (const loc of this.locationlist) {
         console.log(loc);
         await getAttraction(
           loc,
@@ -129,7 +140,7 @@ export default {
           (error) => {
             console.log(error);
           }
-        )
+        );
       }
     },
 
@@ -138,8 +149,7 @@ export default {
         this.attractions = this.tmp_attraction;
         console.log(this.attractions);
       }
-    }
-    
+    },
   },
   created() {
     let param = this.$route.params.articleno;
@@ -167,8 +177,6 @@ export default {
       (error) => {
         console.log(error);
       }
-
-      
     );
     //console.log(this.article.order);
     //console.log(this.attractions);
@@ -185,6 +193,8 @@ export default {
       this.tmproute.time = route.time;
       this.tmproute.meter = route.meter;
       this.tmproute.route = route.route;
+      this.t = route.time;
+      this.m = route.meter;
       console.log("에밋으로받음루트", this.tmproute.time);
     },
     deleteArticle() {
