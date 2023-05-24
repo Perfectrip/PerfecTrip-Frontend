@@ -8,15 +8,15 @@
         v-bind:name="place.title"
         v-bind:no="place.contentId"
         tag="article"
-        style="max-width: 20rem"
+        style="max-width: 20rem; margin-left: 30px; margin-right: 25px; margin-top: 30px;"
         class="mb-2"
       >
         <b-card-img
           :src="`${place.firstImage}`"
-          style="height: 150px"
+          style="height: 150px; opacity: 75%;"
         ></b-card-img>
         <b-card-title
-          style="font-size: 20px; font-weight: 800; margin-bottom: 20px"
+          style="font-size: 15px; font-weight: 800; margin-bottom: 20px"
           >{{ place.title }}</b-card-title
         >
         <b-card-text
@@ -24,9 +24,8 @@
         >
           {{ place.overview }}
         </b-card-text>
-        <b-button href="#" variant="primary" @click="showDetails(place)"
-          >상세보기</b-button
-        >
+        <b-button href="#" variant="success" @click="showDetails(place)"
+        style="background-color: #336600;">상세보기</b-button>
       </b-card>
       <infinite-loading @infinite="infiniteHandler" spinner="spiral">
         <div
