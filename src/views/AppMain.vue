@@ -83,7 +83,7 @@
             </div>
           </a>
           </div>
-        </b-row>>
+        </b-row>
       </b-col>
     </b-row>
   </b-container>
