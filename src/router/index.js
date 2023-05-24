@@ -44,6 +44,11 @@ const routes = [
     component: AppSearch,
   },
   {
+    path: "/details",
+    name: "details",
+    component: () => import(/* webpackChunkName: "user" */ "@/components/hotplace/HotPlaceView"),
+  },
+  {
     path: "/house",
     name: "house",
     component: AppHouse,
