@@ -65,7 +65,7 @@ export default {
             } else {
               $state.complete()
             }
-          },3000)
+          },1000)
         }).catch(err => {
           console.error(err);
         })
