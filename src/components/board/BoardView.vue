@@ -40,11 +40,11 @@
           <b-container class="bv-example-row mt-3 text-center" style="height: 200px;">
           <b-row style="margin:15px;">
             <b-col style="font-size: large; font-weight: 700;" cols="2">이동 거리</b-col>
-            <b-col cols="10">{{ this.tmproute.meter }} km</b-col>
+            <b-col cols="10"> km</b-col>
           </b-row>
           <b-row style="margin:15px;">
             <b-col style="font-size: large; font-weight: 700;" cols="2">소요 시간</b-col>
-            <b-col cols="10">{{ this.tmproute.time }}</b-col>
+            <b-col cols="10"></b-col>
           </b-row>
         </b-container>
             <ul>
