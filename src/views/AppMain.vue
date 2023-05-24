@@ -92,6 +92,9 @@
 <script>
 import MainSearchBar from "@/components/main/MainSearchBar.vue";
 import TheKakaoMap from "@/components/TheKakaoMap.vue";
+import { mapActions } from "vuex";
+
+const hotPlaceStore = "hotPlaceStore";
 export default {
   name: "AppMain",
   components: {
@@ -106,8 +109,10 @@ export default {
     }
   },
   methods: {
+    ...mapActions(hotPlaceStore, ['updateValue']),
     showDetails(place) {
       console.log("이 장소에 대한 정보:", place);
+      this.updateValue(place);
       this.$router.push({ name: "details", params: { id: place } });
     },
     //eslint-disable-next-line no-unused-vars

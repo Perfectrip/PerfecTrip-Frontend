@@ -58,18 +58,23 @@ import MainHeader from "@/components/main/MainHeader.vue";
 //eslint-disable-next-line no-unused-vars
 import InfiniteLoading from "vue-infinite-loading";
 import axios from "axios";
+import { mapState, mapActions } from "vuex";
 
+const hotPlaceStore = "hotPlaceStore";
 export default {
   name: "AppHouse",
   components: {
     MainHeader,
     InfiniteLoading,
   },
+  computed: {
+    ...mapState(hotPlaceStore, ["contentId"])
+  },
   created() {
     axios.get("http://localhost/hotplace?pg=1").then((res) => {
       //console.log(res.data);
       this.places = res.data;
-      console.log(this.places);
+      // console.log(this.places);
     });
   },
   data() {
@@ -79,8 +84,11 @@ export default {
     };
   },
   methods: {
+    ...mapActions(hotPlaceStore, ['updateValue']),
+
     showDetails(place) {
-      console.log("이 장소에 대한 정보:", place);
+      console.log("이 장소에 대한 contentId:", place.contentId);
+      this.updateValue(place);
       this.$router.push({ name: "details", params: { id: place } });
     },
     infiniteHandler($state) {

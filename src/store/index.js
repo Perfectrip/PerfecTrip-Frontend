@@ -8,6 +8,7 @@ import memberStore from "@/store/modules/memberStore";
 import todoStore from "@/store/modules/todoStore";
 import itemStore from "./modules/item/itemStore";
 import selectedStore from "@/store/modules/selectedStore";
+import hotPlaceStore from "@/store/modules/hotPlace";
 
 Vue.use(Vuex);
 
@@ -19,6 +20,7 @@ export default new Vuex.Store({
     todoStore,
     itemStore,
     selectedStore,
+    hotPlaceStore
   },
   plugins: [
     createPersistedState({
