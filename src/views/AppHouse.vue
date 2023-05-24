@@ -13,14 +13,14 @@
       >
         <b-card-img
           :src="`${place.firstImage}`"
-          style="height: 150px; opacity: 75%;"
+          style="height: 180px; opacity: 75%;"
         ></b-card-img>
         <b-card-title
-          style="font-size: 15px; font-weight: 800; margin-bottom: 20px"
+          style="font-size: 18px; font-weight: 800; margin-bottom: 15px; margin-top: 20px;"
           >{{ place.title }}</b-card-title
         >
         <b-card-text
-          style="max-height: 80px; overflow: hidden; text-overflow: ellipsis"
+          style="max-height: 50px; overflow: hidden; text-overflow: ellipsis"
         >
           {{ place.overview }}
         </b-card-text>

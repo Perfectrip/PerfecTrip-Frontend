@@ -72,8 +72,9 @@
       <b-col>
         <b-row cols="12" md="3">
           <div v-for="loc in loc_list" :key="loc.contentId" 
-          class="card-item effect11 left_to_right">
-            <a href="#">
+          class="card-item effect11 left_to_right"
+          @click="showDetails(loc)">
+            <a>
             <div class ="img">
               <img :src="`${ loc.firstImage }`" alt="img">
             </div>
@@ -105,6 +106,10 @@ export default {
     }
   },
   methods: {
+    showDetails(place) {
+      console.log("이 장소에 대한 정보:", place);
+      this.$router.push({ name: "details", params: { id: place } });
+    },
     //eslint-disable-next-line no-unused-vars
     onSlideStart(slide) {
         this.sliding = true
