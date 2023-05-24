@@ -41,7 +41,10 @@
         <!-- after login -->
         <b-navbar-nav class="ml-auto" v-if="userInfo">
           <b-nav-item class="align-self-center">
-            <b-avatar variant="primary" v-text="userInfo.id.charAt(0).toUpperCase()"></b-avatar>
+            <b-avatar
+              variant="primary"
+              v-text="userInfo.id.charAt(0).toUpperCase()"
+            ></b-avatar>
             {{ userInfo.name }}({{ userInfo.id }})님 환영합니다.
           </b-nav-item>
           <b-nav-item class="align-self-center">
@@ -49,7 +52,9 @@
               >내정보보기</router-link
             >
           </b-nav-item>
-          <b-nav-item class="align-self-center link" @click.prevent="onClickLogout"
+          <b-nav-item
+            class="align-self-center link"
+            @click.prevent="onClickLogout"
             >로그아웃</b-nav-item
           >
         </b-navbar-nav>
