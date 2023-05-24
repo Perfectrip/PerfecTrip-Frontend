@@ -4,9 +4,32 @@
       <MainHeader></MainHeader>
     </b-row>
     <b-row>
-      <b-col>
-        <b-alert variant="secondary" show><h3>비밀번호찾기</h3></b-alert>
-      </b-col>
+      <b-container class="bv-example-row mt-3 text-center">
+      <b-row>
+        <b-col></b-col>
+        <b-col cols="5">
+          <b-jumbotron
+            bg-variant="white"
+            text-variant="dark"
+            border-variant="white"
+          >
+            <template #header>PerfecTrip</template>
+  
+            <template #lead> Find password </template>
+  
+            <hr class="my-4" />
+  
+            <p> </p>
+            <p> </p>
+            <p> </p>
+          </b-jumbotron>
+        </b-col>
+        <b-col cols="5">
+          <img src="@/assets/한옥.jpg" height="350px">
+        </b-col>
+        <b-col style="margin-bottom: 100px;"></b-col>
+      </b-row>
+    </b-container>
     </b-row>
 
     <b-row>

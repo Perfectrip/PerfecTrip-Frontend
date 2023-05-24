@@ -1,28 +1,51 @@
 <template>
   <b-container class="bv-example-row mt-3">
     <b-row>
-      <b-col>
-        <b-alert variant="secondary" show><h3>로그인</h3></b-alert>
-      </b-col>
+      <b-container class="bv-example-row mt-3 text-center">
+      <b-row>
+        <b-col></b-col>
+        <b-col cols="5">
+          <b-jumbotron
+            bg-variant="white"
+            text-variant="dark"
+            border-variant="white"
+          >
+            <template #header>PerfecTrip</template>
+  
+            <template #lead> Login </template>
+  
+            <hr class="my-4" />
+  
+            <p> </p>
+            <p> </p>
+            <p> </p>
+          </b-jumbotron>
+        </b-col>
+        <b-col cols="5">
+          <img src="@/assets/강릉.jpg" height="350px">
+        </b-col>
+        <b-col style="margin-bottom: 100px;"></b-col>
+      </b-row>
+    </b-container>
     </b-row>
     <b-row>
       <b-col></b-col>
       <b-col cols="8">
-        <b-card class="login-page" style="max-width: 40rem" align="left">
-          <b-form class="text-left">
+        <div class="login-page">
+          <b-form class="form">
             <b-alert show variant="danger" v-if="isLoginError"
               >아이디 또는 비밀번호를 확인하세요.</b-alert
             >
-            <b-form-group label="아이디:" label-for="userid">
+            <b-form-group class="register-form" label="" label-for="userid">
               <b-form-input
-                id="userid"
+                class="id"
                 v-model="user.userid"
                 required
                 placeholder="아이디 입력...."
                 @keyup.enter="confirm"
               ></b-form-input>
             </b-form-group>
-            <b-form-group label="비밀번호:" label-for="userpwd">
+            <b-form-group label="" label-for="userpwd">
               <b-form-input
                 type="password"
                 id="userpwd"
@@ -39,22 +62,26 @@
               @click="confirm"
               >로그인</b-button
             >
-            <b-button
-              type="button"
-              variant="success"
-              class="m-1"
-              @click="movePage"
-              >회원가입</b-button
-            >
-            <b-button
-              type="button"
-              variant="secondary"
-              class="m-1"
-              @click="findPassword"
-              >비밀번호찾기</b-button
-            >
+            <b-row>
+              <b-col>
+                <b-button
+                  style="background-color: #ffffff; color: #53e3a6;"
+                  variant="outline-primary"
+                  class="new"
+                  @click="movePage"
+                  >회원가입</b-button>
+              </b-col>
+              <b-col>
+                <b-button
+                  style="background-color: #ffffff; color: #53e3a6;"
+                  variant="outline-primary"
+                  class="new"
+                  @click="findPassword"
+                  >비밀번호찾기</b-button>
+              </b-col>
+            </b-row>
           </b-form>
-        </b-card>
+        </div>
       </b-col>
       <b-col></b-col>
     </b-row>
@@ -165,19 +192,35 @@ export default {
     outline: 0;
     background: #f2f2f2;
     width: 100%;
+    height: 50px;
     border: 0;
     margin: 0 0 15px;
     padding: 15px;
     box-sizing: border-box;
     font-size: 14px;
   }
-  
+
   .form button {
     margin: 0 0 15px;
     font-family: "Roboto", sans-serif;
     text-transform: uppercase;
     outline: 0;
     background: #53e3a6;
+    width: 100%;
+    border: 0;
+    padding: 15px;
+    color: #ffffff;
+    font-size: 14px;
+    -webkit-transition: all 0.3 ease;
+    transition: all 0.3 ease;
+    cursor: pointer;
+  }
+  .form button .new{
+    margin: 0 0 15px;
+    font-family: "Roboto", sans-serif;
+    text-transform: uppercase;
+    outline: 0;
+    background: #ffffff;
     width: 100%;
     border: 0;
     padding: 15px;

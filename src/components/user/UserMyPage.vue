@@ -1,17 +1,40 @@
 <template>
   <b-container class="mt-4" v-if="userInfo">
     <b-row>
-      <b-col>
-        <b-alert variant="secondary" show><h3>내정보</h3></b-alert>
-      </b-col>
+      <b-container class="bv-example-row mt-3 text-center">
+      <b-row>
+        <b-col></b-col>
+        <b-col cols="5">
+          <b-jumbotron
+            bg-variant="white"
+            text-variant="dark"
+            border-variant="white"
+          >
+            <template #header>PerfecTrip</template>
+  
+            <template #lead> My Page </template>
+  
+            <hr class="my-4" />
+  
+            <p> </p>
+            <p> </p>
+            <p> </p>
+          </b-jumbotron>
+        </b-col>
+        <b-col cols="5">
+          <img src="@/assets/강릉.jpg" height="350px">
+        </b-col>
+        <b-col style="margin-bottom: 200px;"> <div></div></b-col>
+      </b-row>
+    </b-container>
     </b-row>
     <b-row>
       <b-col></b-col>
       <b-col cols="8">
-        <b-jumbotron>
-          <template #header>My Page</template>
-
-          <template #lead> 내 정보 확인페이지입니다. </template>
+        <b-jumbotron style="background-color: white;">
+          <template #header>
+            <img src="@/assets/profile.jpg" style="height: 200px; border-radius: 100%;"/>
+          </template>
 
           <hr class="my-4" />
 

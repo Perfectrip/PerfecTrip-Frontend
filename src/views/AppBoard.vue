@@ -1,14 +1,16 @@
 <template>
   <b-container class="bv-example-row mt-3 text-center">
-    <h3 class="underline-hotpink">
-      <b-icon icon="clipboard"></b-icon> 여행정보공유
-    </h3>
+    <MainHeader></MainHeader>
     <router-view></router-view>
   </b-container>
 </template>
 <script>
+import MainHeader from "@/components/main/MainHeader.vue";
 export default {
   name: "AppBoard",
+  components: {
+    MainHeader,
+  }
 };
 </script>
 <style scoped>

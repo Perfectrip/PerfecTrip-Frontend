@@ -2,16 +2,16 @@
   <b-container class="bv-example-row mt-3">
     <b-row>
       <b-col>
-        <b-alert show><h3>글목록</h3></b-alert>
+        <!--<b-alert show><h3>글목록</h3></b-alert>-->
       </b-col>
     </b-row>
 
     <b-container class="bv-example-row mt-3">
       <b-row class="align-self-center mb-2">
         <b-col md="2" class="text-start">
-          <b-button variant="outline-primary" size="sm" @click="moveWrite"
+          <!--<b-button variant="outline-primary" size="sm" @click="moveWrite"
             >글쓰기</b-button
-          >
+          >-->
         </b-col>
         <b-col md="7" offset-md="3">
           <b-form class="d-flex" id="form-search" @submit.prevent="search">
@@ -27,7 +27,7 @@
             </b-form-select>
             <b-input-group>
               <b-form-input v-model="searchKeyword" placeholder="검색어..." />
-              <b-button variant="dark" type="submit">검색</b-button>
+              <b-button variant="success" style="background-color: #336600" type="submit">검색</b-button>
             </b-input-group>
           </b-form>
         </b-col>

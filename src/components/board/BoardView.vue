@@ -1,9 +1,6 @@
 <template>
   <b-container class="bv-example-row mt-3">
     <b-row>
-      <b-col>
-        <b-alert show><h3>글보기</h3></b-alert>
-      </b-col>
     </b-row>
     <b-row class="mb-1">
       <b-col class="text-left">
@@ -32,8 +29,12 @@
           no-body
         >
           <b-card-body class="text-left">
-            <div v-html="message"></div>
-            <h3>여행 경로</h3>
+            <b-container class="text-center" style="width: 80%;">
+            <b-row style="margin: 15px">
+              <b-col style="font-size: 25px; font-weight: 700">
+                여행 경로
+              </b-col>
+            </b-row>
             <ViewKakaoMap
               :locations="attractions"
               :send_route="tmproute"
@@ -41,7 +42,7 @@
             ></ViewKakaoMap>
             <b-container
               class="bv-example-row mt-3 text-center"
-              style="height: 200px"
+              style="height: 100px;"
             >
               <b-row style="margin: 15px">
                 <b-col style="font-size: large; font-weight: 700" cols="2"
@@ -56,9 +57,10 @@
                 <b-col cols="10">{{ t }}</b-col>
               </b-row>
             </b-container>
+            </b-container>
             <ul>
-              <li v-for="attraction in attractions" :key="attraction.id">
-                <b-container class="bv-example-row">
+              <li class="no_dot" v-for="attraction in attractions" :key="attraction.id">
+                <b-container class="bv-example-row" style="width: 80%;">
                   <b-row class="mt-3">
                     <b-col cols="11" class="bg-light p-2 pl-5 text-left">
                       <img
@@ -84,6 +86,8 @@
                 </b-container>
               </li>
             </ul>
+            <b-row><b-col></b-col></b-row>
+            <div v-html="message"></div>
           </b-card-body>
         </b-card>
       </b-col>
@@ -217,4 +221,8 @@ export default {
 };
 </script>
 
-<style></style>
+<style>
+.no_dot{
+  list-style-type:none;
+}
+</style>

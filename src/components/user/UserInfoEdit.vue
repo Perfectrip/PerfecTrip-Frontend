@@ -1,7 +1,33 @@
 <template>
   <div class="container">
+    <b-row>
+    <b-container class="bv-example-row mt-3 text-center">
+      <b-row>
+        <b-col></b-col>
+        <b-col cols="5">
+          <b-jumbotron
+            bg-variant="white"
+            text-variant="dark"
+            border-variant="white"
+          >
+            <template #header>PerfecTrip</template>
+  
+            <template #lead> My Page </template>
+  
+            <hr class="my-4" />
+  
+            <p> </p>
+            <p> </p>
+            <p> </p>
+          </b-jumbotron>
+        </b-col>
+        <b-col cols="5">
+          <img src="@/assets/강릉.jpg" height="350px">
+        </b-col>
+        <b-col style="margin-bottom: 200px;"> <div></div></b-col>
+      </b-row>
+    </b-container>
     <div class="form">
-      <h1>My page</h1>
       <form name="update-form" class="update-form" @submit.prevent="updateUser">
         <label for="id">아이디:</label>
         <input type="text" id="id" v-model="id" readonly />
@@ -18,6 +44,7 @@
         </div>
       </form>
     </div>
+  </b-row>
   </div>
 </template>
   

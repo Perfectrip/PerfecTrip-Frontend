@@ -138,6 +138,7 @@
                 this.send_route.route = this.result_route;
                 // 화면에... 경로 보여주기 위해... 에밋 보냄...
                 this.$emit('route_list', this.send_route);
+                console.log('view 에밋 보냄', this.send_route);
             }).catch(err => {
                 console.log(err)
             });
