@@ -7,12 +7,21 @@
     <button @click="addComment">댓글 작성</button>
 
     <h2>댓글 목록</h2>
-    <ul>
-      <li v-for="comment in comments" :key="comment.id">
+    <b-list-group>
+      <b-list-group-item v-for="comment in comments" :key="comment.id">
+        <div>
+          <strong>{{ comment.userId }}</strong>
+          <span>{{ comment.createdTime }}</span>
+        </div>
         <p>{{ comment.commentText }}</p>
-        <button @click="deleteComment(comment.id)">댓글 삭제</button>
-      </li>
-    </ul>
+        <button
+          @click="deleteComment(comment.id)"
+          v-if="userInfo.id === comment.userId"
+        >
+          댓글 삭제
+        </button>
+      </b-list-group-item>
+    </b-list-group>
   </div>
 </template>
 
@@ -48,9 +57,6 @@ export default {
         // 요청에 대한 처리 로직 작성
         this.comments = response.data;
         console.log(this.comments);
-        //this.datalist = response.data;
-        //console.log(this.data);
-        // this.send_data(this.datalist);
       })
       .catch((error) => {
         // 에러 처리 로직 작성
@@ -69,7 +75,8 @@ export default {
         .post(url, param)
         .then((response) => {
           // 요청에 대한 처리 로직 작성
-          console.log(response.data);
+          console.log(response);
+          this.comments.unshift(response.data);
           //this.datalist = response.data;
           //console.log(this.data);
           // this.send_data(this.datalist);
@@ -78,6 +85,7 @@ export default {
           // 에러 처리 로직 작성
           console.error(error);
         });
+      this.commentText = "";
     },
   },
 };

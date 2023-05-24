@@ -46,6 +46,7 @@ const routes = [
   {
     path: "/details",
     name: "details",
+    beforeEnter: onlyAuthUser,
     component: () => import(/* webpackChunkName: "user" */ "@/components/hotplace/HotPlaceView"),
   },
   {

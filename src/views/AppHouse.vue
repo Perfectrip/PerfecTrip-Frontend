@@ -18,10 +18,15 @@
       >
         <b-card-img
           :src="`${place.firstImage}`"
-          style="height: 180px; opacity: 75%;"
+          style="height: 180px; opacity: 75%"
         ></b-card-img>
         <b-card-title
-          style="font-size: 18px; font-weight: 800; margin-bottom: 15px; margin-top: 20px;"
+          style="
+            font-size: 18px;
+            font-weight: 800;
+            margin-bottom: 15px;
+            margin-top: 20px;
+          "
           >{{ place.title }}</b-card-title
         >
         <b-card-text
@@ -76,10 +81,6 @@ export default {
   methods: {
     showDetails(place) {
       console.log("이 장소에 대한 정보:", place);
-      axios
-        .get("http://localhost/hotplace/" + place.contentId)
-        .then(() => {})
-        .catch(() => {});
       this.$router.push({ name: "details", params: { id: place } });
     },
     infiniteHandler($state) {
