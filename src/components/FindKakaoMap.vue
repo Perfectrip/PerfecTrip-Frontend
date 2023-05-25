@@ -122,6 +122,11 @@ export default {
           sections.forEach((section) => {
             this.makeLine(section);
           });
+          const bounds = this.positions.reduce(
+              (bounds, position) => bounds.extend(new window.kakao.maps.LatLng(position.y, position.x)),
+              new kakao.maps.LatLngBounds()
+              );
+          this.map.setBounds(bounds);
           // eslint-disable-next-line no-unused-vars
           var km = summary.distance / 1000;
           // eslint-disable-next-line no-unused-vars
