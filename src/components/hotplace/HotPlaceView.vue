@@ -61,19 +61,36 @@
             </b-col>
           </b-row>
         </b-container>
-        
+        <b-container style="margin-top: 20px;">
+          <b-list-group>
+            <b-list-group-item v-for="(comment, index) in comments" :key="index">
+              <div>
+                <strong>{{ comment.userId }}</strong>
+                <span>{{ comment.createdTime }}</span>
+              </div>  
+              <p v-if=!isBeingFixed[index]>{{ comment.commentText }}</p>
+              <textarea v-else></textarea>
+              <button
+                @click="modifyComment(comment.commentId, index)"
+                v-if="userInfo.id === comment.userId"
+              >
+                댓글 수정
+              </button>
+              <button
+                @click="deleteComment(comment.commentId)"
+                v-if="userInfo.id === comment.userId"
+              >
+                댓글 삭제
+              </button>
+            </b-list-group-item>
+          </b-list-group>
+        </b-container>
       </b-col>
       <b-col></b-col>
     </b-row>
     <!--선택한 여행지 목록 들어갈 자리-->
     <b-row></b-row>
-    <b-row>
-      <b-col></b-col>
-      <b-col cols="10">
-        
-      </b-col>
-      <b-col></b-col>
-    </b-row>
+    
     </b-container>
     <!-- <p>{{ detail }}</p> -->
     <!-- <p>title : {{ detail.title }}</p>
