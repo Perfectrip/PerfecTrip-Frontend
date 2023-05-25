@@ -94,25 +94,62 @@
         </b-container>
         <b-container style="margin-top: 20px">
           <b-list-group>
-            <b-list-group-item v-for="(comment, index) in comments" :key="index">
+            <b-list-group-item
+              v-for="(comment, index) in comments"
+              :key="index"
+            >
               <b-row>
                 <b-col cols="8" class="text-left">
-                  <p v-if=!isBeingFixed[index]>{{ comment.commentText }}</p>
-                  <textarea v-else></textarea>
+                  <p v-if="!comment.isEditing">{{ comment.commentText }}</p>
+                  <textarea v-model="comment.editedText" v-else></textarea>
                 </b-col>
                 <b-col cols="4">
                   <b-row>
                     <b-col>
-                      <strong style="margin-right:10px">{{ comment.userId }}</strong>
+                      <strong style="margin-right: 10px">{{
+                        comment.userId
+                      }}</strong>
                       <span>{{ comment.createdTime }}</span>
                     </b-col>
                     <b-col>
-                      <b-button variant="secondary" style="margin: 5px;"
-                        @click="modifyComment(comment.commentId, index)"
-                        v-if="userInfo.id === comment.userId">  수정  </b-button>
-                      <b-button variant="danger"
+                      <b-button
+                        variant="secondary"
+                        style="margin: 5px"
+                        @click="modifyComment(comment)"
+                        v-if="
+                          userInfo.id === comment.userId && !comment.isEditing
+                        "
+                      >
+                        수정
+                      </b-button>
+                      <b-button
+                        variant="secondary"
+                        style="margin: 5px"
+                        @click="modifyComment2(comment)"
+                        v-if="
+                          userInfo.id === comment.userId && comment.isEditing
+                        "
+                      >
+                        수정
+                      </b-button>
+                      <b-button
+                        variant="danger"
                         @click="deleteComment(comment.commentId)"
-                        v-if="userInfo.id === comment.userId">  삭제   </b-button>
+                        v-if="
+                          userInfo.id === comment.userId && !comment.isEditing
+                        "
+                      >
+                        삭제
+                      </b-button>
+                      <b-button
+                        variant="danger"
+                        @click="resetComment(comment)"
+                        v-if="
+                          userInfo.id === comment.userId && comment.isEditing
+                        "
+                      >
+                        취소
+                      </b-button>
                     </b-col>
                   </b-row>
                 </b-col>
@@ -186,7 +223,6 @@ export default {
       detail: null,
       commentText: "",
       comments: [],
-      isBeingFixed: [],
       array_detail: [],
     };
   },
@@ -209,6 +245,7 @@ export default {
       .then((response) => {
         // 요청에 대한 처리 로직 작성
         this.detail = response.data;
+        // 여기서 for문 돌면서 isEditing 항목 추가 false로
         this.array_detail = [this.detail];
       })
       .catch((error) => {
@@ -222,9 +259,13 @@ export default {
       .then((response) => {
         // 요청에 대한 처리 로직 작성
         if (response.data !== "") {
-          this.comments = response.data;
-          this.isBeingFixed = new Array(response.data.length).fill(false);
-          console.log(this.isBeingFixed);
+          this.comments = response.data.map((item) => {
+            return {
+              ...item,
+              isEditing: false,
+            };
+          });
+          console.log("댓글 목록들", this.comments);
         }
       })
       .catch((error) => {
@@ -250,18 +291,25 @@ export default {
         userId: this.userInfo.id,
         commentText: this.commentText,
         createdTime: timeString,
+        isEditing: false,
       };
 
       axios
         .post(url, param)
         .then(() => {
-          this.comments.unshift(param);
-
           const url2 = `http://localhost/hotplace/comment/${this.cid}`;
           return axios.get(url2);
         })
         .then((response) => {
-          this.comments = response.data;
+          if (response.data !== "") {
+            this.comments = response.data.map((item) => {
+              return {
+                ...item,
+                isEditing: false,
+              };
+            });
+            console.log("댓글 목록들", this.comments);
+          }
         })
         .catch((error) => {
           // 에러 처리 로직 작성
@@ -269,26 +317,56 @@ export default {
         });
       this.commentText = "";
     },
-    modifyComment(commentId, index) {
-      this.isBeingFixed[index] = true;
-      console.log(this.isBeingFixed);
+    modifyComment(comment) {
+      comment.isEditing = true;
+      comment.editedText = comment.commentText;
+
+      console.log("수정중인 댓글", comment);
     },
-    deleteComment(commentId) {
-      const url = `http://localhost/hotplace/comment/${commentId}`;
+    modifyComment2(comment) {
+      comment.isEditing = false;
+      comment.commentText = comment.editedText;
+      comment.editedText = "";
+      // put method
+      const url = `http://localhost/hotplace/comment`;
+      const param = {
+        commentId: comment.commentId,
+        contentId: this.cid,
+        userId: this.userInfo.id,
+        commentText: comment.commentText,
+      };
       axios
-        .delete(url)
+        .put(url, param)
         .then(() => {})
         .catch((error) => {
           // 에러 처리 로직 작성
-          alert(error);
+          console.error(error);
         });
+      console.log("수정완료");
+    },
 
-      for (var i = 0; i < this.comments.length; i++) {
-        if (this.comments[i].commentId === commentId) {
-          this.comments.splice(i, 1);
-          break;
+    deleteComment(commentId) {
+      var con_test = confirm("정말로 삭제하시겠습니까?");
+      if (con_test == true) {
+        const url = `http://localhost/hotplace/comment/${commentId}`;
+        axios
+          .delete(url)
+          .then(() => {})
+          .catch((error) => {
+            // 에러 처리 로직 작성
+            alert(error);
+          });
+
+        for (var i = 0; i < this.comments.length; i++) {
+          if (this.comments[i].commentId === commentId) {
+            this.comments.splice(i, 1);
+            break;
+          }
         }
       }
+    },
+    resetComment(comment) {
+      comment.isEditing = false;
     },
   },
 };
