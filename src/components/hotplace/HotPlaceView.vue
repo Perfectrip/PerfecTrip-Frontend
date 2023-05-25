@@ -1,7 +1,32 @@
 <template>
   <b-container class="bv-example-row mt-3 text-center">
     <b-row>
-      <MainHeader></MainHeader>
+      <b-container class="bv-example-row mt-3 text-center">
+      <b-row>
+        <b-col></b-col>
+        <b-col cols="5">
+          <b-jumbotron
+            bg-variant="white"
+            text-variant="dark"
+            border-variant="white"
+          >
+            <template #header>PerfecTrip</template>
+  
+            <template #lead> 지금 인기있는 장소를 확인하세요 </template>
+  
+            <hr class="my-4" />
+  
+            <p> </p>
+            <p> </p>
+            <p> </p>
+          </b-jumbotron>
+        </b-col>
+        <b-col cols="5">
+          <img src="@/assets/제주.jpg" height="350px">
+        </b-col>
+        <b-col style="margin-bottom: 400px;"></b-col>
+      </b-row>
+    </b-container>
     </b-row>
     <b-row>
       <b-col></b-col>
@@ -209,12 +234,10 @@ import axios from "axios";
 import { mapState } from "vuex";
 const memberStore = "memberStore";
 const hotPlaceStore = "hotPlaceStore";
-import MainHeader from "@/components/main/MainHeader.vue";
 import SmallKakaoMap from "@/components/SmallKakaoMap.vue";
 export default {
   name: "HotPlaceView",
   components: {
-    MainHeader,
     SmallKakaoMap,
   },
   data() {
