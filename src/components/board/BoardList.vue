@@ -155,6 +155,7 @@ export default {
       // pg 값이 변경될 때마다 호출되는 로직 구현
       // 예: 다음 게시글을 가져오는 API 호출 등
       this.fetchArticles();
+      window.scrollTo(0,0);
     },
   },
 };

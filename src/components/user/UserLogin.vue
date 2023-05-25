@@ -109,6 +109,7 @@ export default {
   created() {
     // ...
     this.SET_IS_LOGIN_ERROR(false); // isLoginError 값을 false로 변경
+    window.scrollTo(0,0);
   },
   computed: {
     ...mapState(memberStore, ["isLogin", "isLoginError", "userInfo"]),
