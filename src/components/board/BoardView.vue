@@ -1,7 +1,6 @@
 <template>
   <b-container class="bv-example-row mt-3">
-    <b-row>
-    </b-row>
+    <b-row> </b-row>
     <b-row class="mb-1">
       <b-col class="text-left">
         <b-button variant="outline-primary" @click="moveList">목록</b-button>
@@ -29,38 +28,42 @@
           no-body
         >
           <b-card-body class="text-left">
-            <b-container class="text-center" style="width: 80%;">
-            <b-row style="margin: 15px">
-              <b-col style="font-size: 25px; font-weight: 700">
-                여행 경로
-              </b-col>
-            </b-row>
-            <ViewKakaoMap
-              :locations="attractions"
-              :send_route="tmproute"
-              @route_list="getRoute"
-            ></ViewKakaoMap>
-            <b-container
-              class="bv-example-row mt-3 text-center"
-              style="height: 100px;"
-            >
+            <b-container class="text-center" style="width: 80%">
               <b-row style="margin: 15px">
-                <b-col style="font-size: large; font-weight: 700" cols="2"
-                  >이동 거리</b-col
-                >
-                <b-col cols="10">{{ m }} km</b-col>
+                <b-col style="font-size: 25px; font-weight: 700">
+                  여행 경로
+                </b-col>
               </b-row>
-              <b-row style="margin: 15px">
-                <b-col style="font-size: large; font-weight: 700" cols="2"
-                  >소요 시간</b-col
-                >
-                <b-col cols="10">{{ t }}</b-col>
-              </b-row>
-            </b-container>
+              <ViewKakaoMap
+                :locations="attractions"
+                :send_route="tmproute"
+                @route_list="getRoute"
+              ></ViewKakaoMap>
+              <b-container
+                class="bv-example-row mt-3 text-center"
+                style="height: 100px"
+              >
+                <b-row style="margin: 15px">
+                  <b-col style="font-size: large; font-weight: 700" cols="2"
+                    >이동 거리</b-col
+                  >
+                  <b-col cols="10">{{ m }} km</b-col>
+                </b-row>
+                <b-row style="margin: 15px">
+                  <b-col style="font-size: large; font-weight: 700" cols="2"
+                    >소요 시간</b-col
+                  >
+                  <b-col cols="10">{{ t }}</b-col>
+                </b-row>
+              </b-container>
             </b-container>
             <ul>
-              <li class="no_dot" v-for="attraction in attractions" :key="attraction.id">
-                <b-container class="bv-example-row" style="width: 80%;">
+              <li
+                class="no_dot"
+                v-for="attraction in attractions"
+                :key="attraction.id"
+              >
+                <b-container class="bv-example-row" style="width: 80%">
                   <b-row class="mt-3">
                     <b-col cols="11" class="bg-light p-2 pl-5 text-left">
                       <img
@@ -199,10 +202,10 @@ export default {
       this.tmproute.route = route.route;
       this.t = route.time;
       this.m = route.meter;
-      console.log("에밋으로받음루트", this.tmproute.time);
+      // console.log("에밋으로받음루트", this.tmproute.time);
     },
     deleteArticle() {
-      if (confirm("정말로 삭제?")) {
+      if (confirm("정말로 삭제하시겠습니까?")) {
         this.$router.replace({
           name: "boarddelete",
           params: { articleno: this.article.articleNo },
@@ -222,7 +225,7 @@ export default {
 </script>
 
 <style>
-.no_dot{
-  list-style-type:none;
+.no_dot {
+  list-style-type: none;
 }
 </style>
