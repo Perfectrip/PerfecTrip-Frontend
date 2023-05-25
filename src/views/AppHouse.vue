@@ -68,7 +68,7 @@ export default {
     InfiniteLoading,
   },
   computed: {
-    ...mapState(hotPlaceStore, ["contentId"])
+    ...mapState(hotPlaceStore, ["contentId"]),
   },
   created() {
     axios.get("http://localhost/hotplace?pg=1").then((res) => {
@@ -84,10 +84,10 @@ export default {
     };
   },
   methods: {
-    ...mapActions(hotPlaceStore, ['updateValue']),
+    ...mapActions(hotPlaceStore, ["updateValue"]),
 
     showDetails(place) {
-      console.log("이 장소에 대한 contentId:", place.contentId);
+      // console.log("이 장소에 대한 contentId:", place.contentId);
       this.updateValue(place);
       this.$router.push({ name: "details", params: { id: place } });
     },
@@ -95,13 +95,13 @@ export default {
       axios
         .get("http://localhost/hotplace?pg=" + this.limit)
         .then((res) => {
-          console.log("추가로딩", res);
+          // console.log("추가로딩", res);
           setTimeout(() => {
             if (res.data.length) {
               this.places = this.places.concat(res.data);
               $state.loaded();
               this.limit += 1;
-              console.log("after", this.places.length, this.limit);
+              // console.log("after", this.places.length, this.limit);
               if (res.data.length / 20 < 1) {
                 $state.complete();
               }
@@ -113,7 +113,7 @@ export default {
         .catch((err) => {
           console.error(err);
         });
-      console.log(this.places);
+      // console.log(this.places);
     },
   },
 };
