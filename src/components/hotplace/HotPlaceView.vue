@@ -63,6 +63,21 @@
                   <b-row class="text-left" style="">
                     <b-col>{{ detail.tel }}</b-col>
                   </b-row>
+                  <b-row
+                    class="text-left"
+                    style="margin-top: 30px;
+                      margin-bottom: 20px;
+                      font-size: 20px;
+                      font-weight: 700;"
+                  >
+                    <b-col>날씨</b-col>
+                  </b-row>
+                  <b-row class="text-left" style="">
+                    <b-col>날씨 : {{this.weather.sun}}</b-col>
+                  </b-row>
+                  <b-row class="text-left" style="">
+                    <b-col>강수 확률 : {{this.weather.rain}}</b-col>
+                  </b-row>
                 </b-col>
               </b-row>
             </b-col>
@@ -196,6 +211,7 @@ import { mapState } from "vuex";
 const memberStore = "memberStore";
 const hotPlaceStore = "hotPlaceStore";
 import SmallKakaoMap from "@/components/SmallKakaoMap.vue";
+
 export default {
   name: "HotPlaceView",
   components: {
@@ -208,6 +224,7 @@ export default {
       commentText: "",
       comments: [],
       array_detail: [],
+      weather: {},
     };
   },
   props: {
@@ -222,8 +239,42 @@ export default {
     // place 정보를 사용하여 추가적인 로직을 수행할 수 있습니다.
     this.cid = this.contentId;
     this.detail = this.placeInfo;
-
+    var today = new Date();
+    var year = today.getFullYear();
+    var month = ('0' + (today.getMonth() + 1)).slice(-2);
+    var day = ('0' + today.getDate()).slice(-2);
+    //eslint-disable-next-line no-unused-vars
+    var dateString = year + month + day;
+    console.log(this.detail);
+    const urlrain = 'https://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/getVilageFcst?serviceKey=' +
+      'a%2B4EqZEUaO8VB1PqSIQilM2GjsSALMuAYDes%2FVu9qVV3LY7GX6LhOlHv%2F4B9RPXY8WTW9Q2Eu5ECsCLp%2BSjAHg%3D%3D'
+      + '&pageNo=1&numOfRows=10&dataType=JSON&base_date=' +
+      +dateString + '&base_time=0500&nx=' + this.detail.latitude.toFixed(0) + '&ny='+this.detail.longitude.toFixed(0);
     const url1 = `http://localhost/hotplace/${this.cid}`;
+    axios.get(urlrain)
+      .then((response) => {
+        var sky = response.data.response.body.items.item[5].fcstValue;
+        var pty = response.data.response.body.items.item[6].fcstValue;
+        if (sky === '1') {
+          this.weather.sun = '맑음';
+        } else if (sky === '3') {
+          this.weather.sun = '구름많음';
+        } else {
+          this.weather.sun = '흐림';
+        }
+        if (pty === '0') {
+          this.weather.rain = '강수 확률 없음';
+        } else if (pty === '1') {
+          this.weather.rain = '비';
+        } else if (pty === '2') {
+          this.weather.rain = '비 혹은 눈';
+        } else if (pty === '3') {
+          this.weather.rain = '눈';
+        } else {
+          this.weather.rain = '소나기';
+        }
+        console.log(this.weather);
+      });
     axios
       .get(url1)
       .then((response) => {

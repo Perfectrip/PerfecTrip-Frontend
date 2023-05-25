@@ -196,7 +196,7 @@ export default {
 //window.scrollTo(0, 0);
     html2pdf(this.$refs.pdfarea, {
     margin: 0,
-    filename: 'document.pdf',
+    filename: 'myTripPlan.pdf',
     image: {type:"jpg", quality: 0.95},
     //	allowTaint 옵션추가
     html2canvas: {
@@ -209,7 +209,6 @@ export default {
      },
     jsPDF: {orientation: 'portrait', unit: 'mm', format: 'a4', compressPDF: true}
     })
-    console.log("되나?");
     },
     
     moveModifyArticle() {
