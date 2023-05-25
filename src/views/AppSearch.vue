@@ -58,7 +58,7 @@ export default {
   methods: {
     checkData(data_list) {
       this.loc_list = data_list;
-      console.log(this.loc_list);
+      // console.log(this.loc_list);
     },
   },
 };

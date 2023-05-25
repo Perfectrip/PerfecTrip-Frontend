@@ -41,6 +41,7 @@ export default {
   data() {
     return {
       sidoCode: null,
+      text: null,
       datalist: [],
     };
   },

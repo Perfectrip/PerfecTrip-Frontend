@@ -24,7 +24,7 @@
               나의 여행계획
             </router-link>
             <router-link :to="{ name: 'house' }" class="m-2 link">
-              핫플자랑하기
+              핫플레이스
             </router-link>
             <router-link :to="{ name: 'board' }" class="m-2 link">
               여행정보공유
@@ -103,7 +103,7 @@ export default {
       // this.SET_USER_INFO(null);
       // sessionStorage.removeItem("access-token");
       // if (this.$route.path != "/") this.$router.push({ name: "main" });
-      console.log(this.userInfo.id);
+      // console.log(this.userInfo.id);
       //vuex actions에서 userLogout 실행(Backend에 저장 된 리프레시 토큰 없애기
       //+ satate에 isLogin, userInfo 정보 변경)
       // this.$store.dispatch("userLogout", this.userInfo.userid);

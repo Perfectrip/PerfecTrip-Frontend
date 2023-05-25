@@ -20,21 +20,30 @@
           :locations="this.items"
           :result="tmpStr"
           @way_list="getOrder"
-          :send_route = "tmproute"
-          @route_list = "getRoute"
+          :send_route="tmproute"
+          @route_list="getRoute"
         ></FindKakaoMap>
-        <b-container class="bv-example-row mt-3 text-center" style="height: 200px;">
-          <b-row style="margin:15px;">
-            <b-col style="font-size: large; font-weight: 700;" cols="2">경로</b-col>
-            <b-col cols="10">{{tmproute.route}}</b-col>
+        <b-container
+          class="bv-example-row mt-3 text-center"
+          style="height: 200px"
+        >
+          <b-row style="margin: 15px">
+            <b-col style="font-size: large; font-weight: 700" cols="2"
+              >경로</b-col
+            >
+            <b-col cols="10">{{ tmproute.route }}</b-col>
           </b-row>
-          <b-row style="margin:15px;">
-            <b-col style="font-size: large; font-weight: 700;" cols="2">이동 거리</b-col>
-            <b-col cols="10">{{tmproute.meter}} km</b-col>
+          <b-row style="margin: 15px">
+            <b-col style="font-size: large; font-weight: 700" cols="2"
+              >이동 거리</b-col
+            >
+            <b-col cols="10">{{ tmproute.meter }} km</b-col>
           </b-row>
-          <b-row style="margin:15px;">
-            <b-col style="font-size: large; font-weight: 700;" cols="2">소요 시간</b-col>
-            <b-col cols="10">{{tmproute.time}}</b-col>
+          <b-row style="margin: 15px">
+            <b-col style="font-size: large; font-weight: 700" cols="2"
+              >소요 시간</b-col
+            >
+            <b-col cols="10">{{ tmproute.time }}</b-col>
           </b-row>
         </b-container>
       </b-col>
@@ -124,13 +133,13 @@ export default {
     getOrder(str) {
       this.tmpStr = str;
       this.article.order = str;
-      console.log("에밋으로받음", this.article.order);
+      // console.log("에밋으로받음", this.article.order);
     },
     getRoute(route) {
       this.tmproute.time = route.time;
       this.tmproute.meter = route.meter;
       this.tmproute.route = route.route;
-      console.log("에밋으로받음", this.tmproute.route);
+      // console.log("에밋으로받음", this.tmproute.route);
     },
     onSubmit(event) {
       event.preventDefault();
