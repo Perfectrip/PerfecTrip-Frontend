@@ -1,7 +1,7 @@
 import jwtDecode from "jwt-decode";
 import router from "@/router";
 import { login, findById, tokenRegeneration, logout } from "@/api/member";
-import axios from 'axios';
+import axios from "axios";
 const memberStore = {
   namespaced: true,
   state: {
