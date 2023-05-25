@@ -64,24 +64,30 @@
         <b-container style="margin-top: 20px;">
           <b-list-group>
             <b-list-group-item v-for="(comment, index) in comments" :key="index">
-              <div>
-                <strong>{{ comment.userId }}</strong>
-                <span>{{ comment.createdTime }}</span>
-              </div>  
-              <p v-if=!isBeingFixed[index]>{{ comment.commentText }}</p>
-              <textarea v-else></textarea>
-              <button
-                @click="modifyComment(comment.commentId, index)"
-                v-if="userInfo.id === comment.userId"
-              >
-                댓글 수정
-              </button>
-              <button
-                @click="deleteComment(comment.commentId)"
-                v-if="userInfo.id === comment.userId"
-              >
-                댓글 삭제
-              </button>
+              <b-row>
+                <b-col cols="8" class="text-left">
+                  <p v-if=!isBeingFixed[index]>{{ comment.commentText }}</p>
+                  <textarea v-else></textarea>
+                </b-col>
+                <b-col>
+                  <b-row><span>{{ comment.createdTime }}</span></b-row>
+                  <b-row><strong>{{ comment.userId }}</strong></b-row>
+                </b-col>
+                <b-col>
+                  <button
+                  @click="modifyComment(comment.commentId, index)"
+                  v-if="userInfo.id === comment.userId"
+                  >
+                    댓글 수정
+                  </button>
+                  <button
+                    @click="deleteComment(comment.commentId)"
+                    v-if="userInfo.id === comment.userId"
+                  >
+                    댓글 삭제
+                  </button>
+                </b-col>
+              </b-row>
             </b-list-group-item>
           </b-list-group>
         </b-container>
