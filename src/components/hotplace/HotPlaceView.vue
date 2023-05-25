@@ -2,31 +2,31 @@
   <b-container class="bv-example-row mt-3 text-center">
     <b-row>
       <b-container class="bv-example-row mt-3 text-center">
-      <b-row>
-        <b-col></b-col>
-        <b-col cols="5">
-          <b-jumbotron
-            bg-variant="white"
-            text-variant="dark"
-            border-variant="white"
-          >
-            <template #header>PerfecTrip</template>
-  
-            <template #lead> 지금 인기있는 장소를 확인하세요 </template>
-  
-            <hr class="my-4" />
-  
-            <p> </p>
-            <p> </p>
-            <p> </p>
-          </b-jumbotron>
-        </b-col>
-        <b-col cols="5">
-          <img src="@/assets/제주.jpg" height="350px">
-        </b-col>
-        <b-col style="margin-bottom: 400px;"></b-col>
-      </b-row>
-    </b-container>
+        <b-row>
+          <b-col></b-col>
+          <b-col cols="5">
+            <b-jumbotron
+              bg-variant="white"
+              text-variant="dark"
+              border-variant="white"
+            >
+              <template #header>PerfecTrip</template>
+
+              <template #lead> 지금 인기있는 장소를 확인하세요 </template>
+
+              <hr class="my-4" />
+
+              <p></p>
+              <p></p>
+              <p></p>
+            </b-jumbotron>
+          </b-col>
+          <b-col cols="5">
+            <img src="@/assets/제주.jpg" height="350px" />
+          </b-col>
+          <b-col style="margin-bottom: 400px"></b-col>
+        </b-row>
+      </b-container>
     </b-row>
     <b-row>
       <b-col></b-col>
@@ -188,45 +188,6 @@
     <!--선택한 여행지 목록 들어갈 자리-->
     <b-row></b-row>
   </b-container>
-  <!-- <p>{{ detail }}</p> -->
-  <!-- <p>title : {{ detail.title }}</p>
-    <p>addr1 : {{ detail.addr1 }}</p>
-    <p>zipCode : {{ detail.zipCode }}</p>
-    <p>tel : {{ detail.tel }}</p>
-    <p>firstImage :  {{ detail.firstImage}}</p>
-    <p>readCount : {{ detail.readCount }}</p>
-
-    <p>lat : {{ detail.latitude }}</p>
-    <p>lon : {{ detail.longitude }}</p>
-    <p>overview : {{ detail.overview }}</p>
-
-    <h2>댓글 작성</h2>
-    <textarea v-model="commentText" rows="4" cols="50"></textarea>
-    <button @click="addComment">댓글 작성</button>
-
-    <h2>댓글 목록</h2>
-    <b-list-group>
-      <b-list-group-item v-for="(comment, index) in comments" :key="index">
-        <div>
-          <strong>{{ comment.userId }}</strong>
-          <span>{{ comment.createdTime }}</span>
-        </div>
-        <p v-if=!isBeingFixed[index]>{{ comment.commentText }}</p>
-        <textarea v-else></textarea>
-        <button
-          @click="modifyComment(comment.commentId, index)"
-          v-if="userInfo.id === comment.userId"
-        >
-          댓글 수정
-        </button>
-        <button
-          @click="deleteComment(comment.commentId)"
-          v-if="userInfo.id === comment.userId"
-        >
-          댓글 삭제
-        </button>
-      </b-list-group-item>
-    </b-list-group> -->
 </template>
 
 <script>
