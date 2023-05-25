@@ -1,7 +1,82 @@
 <template>
-  <div>
+    <b-container class="bv-example-row mt-3 text-center">
+      <b-row>
+        <MainHeader></MainHeader>
+      </b-row>
+      <b-row>
+      <b-col></b-col>
+      <b-col cols="10">
+        <b-container>
+          <!--여행지 정보 보여주는 화면-->
+          <b-row>
+            <b-col>
+            <b-row >
+              <b-col>
+                <img :src="`${detail.firstImage}`" style="width: 450px; opacity: 85%;">
+              </b-col>
+              <b-col>
+                <b-row class="text-right" style="">
+                  <b-col>조회수 :  {{ detail.readCount}}</b-col>
+                </b-row>
+                <b-row class="text-left" style="margin-top:10px; margin-bottom: 20px; font-size: 20px; font-weight: 700;">
+                  <b-col>{{ detail.title }}</b-col>
+                </b-row>
+                <b-row class="text-left" style="">
+                  <b-col>{{ detail.addr1}}</b-col>
+                </b-row>
+                <b-row class="text-left" style="">
+                  <b-col>{{ detail.tel}}</b-col>
+                </b-row>
+              </b-col>
+            </b-row>
+            </b-col>
+          </b-row>
+          <b-row style="margin-top: 50px;">
+            <b-col>
+              <b-tabs content-class="mt-3" align="right">
+                <b-tab title="지도" class="text-center" style="align-items: center; justify-content: center;" active>
+                  <SmallKakaoMap :chargers="[this.detail]"></SmallKakaoMap>
+                </b-tab>
+                <b-tab title="정보"><p>{{ detail.overview }}</p></b-tab>
+              </b-tabs>
+            </b-col>
+          </b-row>
+        </b-container>
+        <!--댓글입력창-->
+        <b-container style="margin-top: 50px;">
+          <b-row>
+            <b-col class="text-left" style="margin-left: 10px; margin-bottom: 30px; font-size: 25px; font-weight: 800;">댓글({{ this.comments.length }})</b-col>
+          </b-row>
+          <b-row>
+            <b-col cols="10">
+              <b-form-textarea
+                id="textarea"
+                placeholder="댓글을 작성해주세요"
+                v-model="commentText"
+                rows="3"
+              ></b-form-textarea>
+            </b-col>
+            <b-col cols="2">
+              <b-button style="height: 85px; width: 80px; background-color: #336600;" @click="addComment">등록</b-button>
+            </b-col>
+          </b-row>
+        </b-container>
+        
+      </b-col>
+      <b-col></b-col>
+    </b-row>
+    <!--선택한 여행지 목록 들어갈 자리-->
+    <b-row></b-row>
+    <b-row>
+      <b-col></b-col>
+      <b-col cols="10">
+        
+      </b-col>
+      <b-col></b-col>
+    </b-row>
+    </b-container>
     <!-- <p>{{ detail }}</p> -->
-    <p>title : {{ detail.title }}</p>
+    <!-- <p>title : {{ detail.title }}</p>
     <p>addr1 : {{ detail.addr1 }}</p>
     <p>zipCode : {{ detail.zipCode }}</p>
     <p>tel : {{ detail.tel }}</p>
@@ -38,8 +113,8 @@
           댓글 삭제
         </button>
       </b-list-group-item>
-    </b-list-group>
-  </div>
+    </b-list-group> -->
+
 </template>
 
 <script>
@@ -47,8 +122,14 @@ import axios from "axios";
 import { mapState } from "vuex";
 const memberStore = "memberStore";
 const hotPlaceStore = "hotPlaceStore";
+import MainHeader from "@/components/main/MainHeader.vue";
+import SmallKakaoMap from "@/components/SmallKakaoMap.vue";
 export default {
   name: "HotPlaceView",
+  components: {
+    MainHeader,
+    SmallKakaoMap,
+  },
   data() {
     return {
       cid: null,
