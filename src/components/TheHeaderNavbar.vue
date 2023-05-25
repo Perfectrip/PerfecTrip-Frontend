@@ -24,7 +24,7 @@
               나의 여행계획
             </router-link>
             <router-link :to="{ name: 'house' }" class="m-2 link">
-              핫플자랑하기
+              핫플레이스
             </router-link>
             <router-link :to="{ name: 'board' }" class="m-2 link">
               여행정보공유
