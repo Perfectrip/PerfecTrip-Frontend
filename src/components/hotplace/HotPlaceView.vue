@@ -68,15 +68,14 @@
                     style="margin-top: 30px;
                       margin-bottom: 20px;
                       font-size: 20px;
-                      font-weight: 700;"
-                  >
+                      font-weight: 700;">
                     <b-col>날씨</b-col>
                   </b-row>
                   <b-row class="text-left" style="">
-                    <b-col>날씨 : {{this.weather.sun}}</b-col>
+                    <b-col>날씨 : {{ sun }}</b-col>
                   </b-row>
                   <b-row class="text-left" style="">
-                    <b-col>강수 확률 : {{this.weather.rain}}</b-col>
+                    <b-col>강수 확률 : {{ rain }}</b-col>
                   </b-row>
                 </b-col>
               </b-row>
@@ -225,6 +224,8 @@ export default {
       comments: [],
       array_detail: [],
       weather: {},
+      sun: null,
+      rain: null,
     };
   },
   props: {
@@ -273,6 +274,8 @@ export default {
         } else {
           this.weather.rain = '소나기';
         }
+        this.sun = this.weather.sun;
+        this.rain = this.weather.rain;
         console.log(this.weather);
       });
     axios
