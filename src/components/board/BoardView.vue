@@ -1,5 +1,5 @@
 <template>
-  <b-container class="bv-example-row mt-3">
+  <b-container class="bv-example-row mt-3" ref="pdfarea">
     <b-row> </b-row>
     <b-row class="mb-1">
       <b-col class="text-left">
@@ -95,6 +95,7 @@
         </b-card>
       </b-col>
     </b-row>
+    <b-button class="mb-5 float-right" @click="exportToPDF">PDF 다운로드</b-button>
   </b-container>
 </template>
 
@@ -106,6 +107,7 @@ import { getArticle, getAttraction } from "@/api/board";
 import { mapState } from "vuex";
 import ViewKakaoMap from "../ViewKakaoMap.vue";
 const memberStore = "memberStore";
+import html2pdf from 'html2pdf.js'
 
 export default {
   name: "BoardDetail",
@@ -189,6 +191,27 @@ export default {
     //console.log(this.attractions);
   },
   methods: {
+    exportToPDF() {
+      
+//window.scrollTo(0, 0);
+    html2pdf(this.$refs.pdfarea, {
+    margin: 0,
+    filename: 'document.pdf',
+    image: {type:"jpg", quality: 0.95},
+    //	allowTaint 옵션추가
+    html2canvas: {
+      useCORS: true,
+      scrollY: 0,
+      scale:1,
+      dpi: 300,
+      letterRendering: true,
+      allowTaint: false 
+     },
+    jsPDF: {orientation: 'portrait', unit: 'mm', format: 'a4', compressPDF: true}
+    })
+    console.log("되나?");
+    },
+    
     moveModifyArticle() {
       this.$router.replace({
         name: "boardmodify",
