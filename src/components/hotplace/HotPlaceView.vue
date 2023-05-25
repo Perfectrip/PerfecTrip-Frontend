@@ -324,6 +324,10 @@ export default {
       console.log("수정중인 댓글", comment);
     },
     modifyComment2(comment) {
+      if (comment.editedText === "") {
+        alert("댓글을 작성하세요.");
+        return;
+      }
       comment.isEditing = false;
       comment.commentText = comment.editedText;
       comment.editedText = "";
@@ -363,6 +367,7 @@ export default {
             break;
           }
         }
+        alert("삭제되었습니다.");
       }
     },
     resetComment(comment) {
