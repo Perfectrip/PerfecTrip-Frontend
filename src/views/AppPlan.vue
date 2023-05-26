@@ -117,6 +117,7 @@ export default {
     };
   },
   created() {
+    window.scrollTo(0,0);
     //console.log(this.items);
     this.article.userid = this.userInfo.id;
   },

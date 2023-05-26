@@ -237,16 +237,17 @@ export default {
   },
 
   created() {
+    window.scrollTo(0,0);
     // place 정보를 사용하여 추가적인 로직을 수행할 수 있습니다.
     this.cid = this.contentId;
     this.detail = this.placeInfo;
-    var today = new Date();
-    var year = today.getFullYear();
-    var month = ('0' + (today.getMonth() + 1)).slice(-2);
-    var day = ('0' + today.getDate()).slice(-2);
+    // var today = new Date();
+    // var year = today.getFullYear();
+    // var month = ('0' + (today.getMonth() + 1)).slice(-2);
+    // var day = ('0' + today.getDate()).slice(-2);
     //eslint-disable-next-line no-unused-vars
-    var dateString = year + month + day;
-    console.log(this.detail);
+    var dateString = "20230525";
+    console.log(dateString);
     const urlrain = 'https://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/getVilageFcst?serviceKey=' +
       'a%2B4EqZEUaO8VB1PqSIQilM2GjsSALMuAYDes%2FVu9qVV3LY7GX6LhOlHv%2F4B9RPXY8WTW9Q2Eu5ECsCLp%2BSjAHg%3D%3D'
       + '&pageNo=1&numOfRows=10&dataType=JSON&base_date=' +

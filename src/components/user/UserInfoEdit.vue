@@ -104,6 +104,7 @@ export default {
           console.error(error); // 에러 처리 예시
           alert(error);
         });
+        window.scrollTo(0,0);
     },
     goToMypage() {
       this.$router.push({ name: "mypage" });
